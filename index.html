@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Volver a Elegirme · Método Cuerpo Raíz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #232920;
+    --ink-soft: #4a5240;
+    --root-dark: #2c3524;
+    --root-mid: #6c7a56;
+    --clay: #b3603f;
+    --clay-soft: #c98a68;
+    --parchment: #f2ece0;
+    --parchment-2: #e8e0cf;
+    --cream: #f8f4ea;
+    --line: rgba(35,41,32,0.14);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+  }
+
+  body{
+    font-family:'Work Sans', sans-serif;
+    color:var(--ink);
+    background:var(--parchment);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+  button{ font-family:inherit; cursor:pointer; border:none; }
+
+  :focus-visible{
+    outline:2px solid var(--clay);
+    outline-offset:3px;
+  }
+
+  .serif{ font-family:'Fraunces', serif; }
+
+  .eyebrow{
+    font-family:'Work Sans', sans-serif;
+    font-size:0.72rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    font-weight:600;
+  }
+
+  /* ---------- topbar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:1.1rem 2.5rem;
+    background:var(--root-dark);
+    color:var(--cream);
+  }
+  .topbar .tagline{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:0.95rem;
+    opacity:0.9;
+  }
+  .topbar .cta-link{
+    font-size:0.75rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    font-weight:600;
+    border-bottom:1px solid var(--clay-soft);
+    padding-bottom:2px;
+    white-space:nowrap;
+    margin-left:1rem;
+  }
+  .topbar .cta-link:hover{ color:var(--clay-soft); }
+
+  /* ---------- hero ---------- */
+  .hero{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    min-height:88vh;
+  }
+  .hero-text{
+    display:flex; flex-direction:column; justify-content:center;
+    padding:4rem 4rem;
+    gap:1.6rem;
+    position:relative;
+  }
+  .hero-text .eyebrow{ color:var(--clay); }
+  .hero-text h1{
+    font-size:clamp(2.6rem, 5vw, 4.2rem);
+    font-weight:450;
+    line-height:1.04;
+    color:var(--root-dark);
+  }
+  .hero-text .subtitle{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.35rem;
+    color:var(--clay);
+    font-weight:400;
+  }
+  .hero-text p.desc{
+    max-width:34ch;
+    font-size:1.02rem;
+    color:var(--ink-soft);
+  }
+  .hero-text .fine{
+    font-size:0.72rem;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    max-width:36ch;
+    line-height:1.7;
+  }
+  .btn{
+    display:inline-block;
+    background:var(--root-dark);
+    color:var(--cream);
+    padding:0.95rem 2.1rem;
+    font-size:0.76rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    font-weight:600;
+    width:fit-content;
+    transition:background 0.25s ease, transform 0.25s ease;
+  }
+  .btn:hover{ background:var(--clay); transform:translateY(-1px); }
+  .btn.ghost{
+    background:transparent;
+    border:1px solid var(--cream);
+  }
+  .btn.ghost:hover{ background:var(--cream); color:var(--root-dark); }
+
+  .hero-visual{
+    position:relative;
+    background:linear-gradient(160deg, var(--root-mid) 0%, var(--root-dark) 100%);
+    overflow:hidden;
+  }
+  .hero-visual svg{ position:absolute; inset:0; width:100%; height:100%; }
+  .hero-visual .caption{
+    position:absolute; bottom:2rem; right:2rem;
+    color:var(--cream); opacity:0.55;
+    font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase;
+    text-align:right;
+  }
+
+  /* ---------- quote banner ---------- */
+  .quote-banner{
+    background:var(--root-mid);
+    color:var(--cream);
+    text-align:center;
+    padding:3.2rem 2rem;
+  }
+  .quote-banner p{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:clamp(1.2rem, 2.4vw, 1.7rem);
+    max-width:44ch;
+    margin:0 auto;
+    line-height:1.5;
+  }
+
+  /* ---------- story section ---------- */
+  .story{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:stretch;
+    background:var(--parchment);
+  }
+  .story-visual{
+    position:relative;
+    min-height:520px;
+    background:linear-gradient(200deg, var(--clay-soft) 0%, var(--clay) 60%, var(--root-dark) 130%);
+    overflow:hidden;
+  }
+  .story-visual svg{ position:absolute; inset:0; width:100%; height:100%; }
+  .story-text{
+    padding:4.5rem 4rem;
+    display:flex; flex-direction:column; justify-content:center; gap:1.3rem;
+  }
+  .story-text .eyebrow{ color:var(--root-mid); }
+  .story-text h2{
+    font-size:clamp(2rem, 3.6vw, 2.9rem);
+    font-weight:450;
+    color:var(--root-dark);
+    line-height:1.08;
+  }
+  .story-text p{ max-width:52ch; color:var(--ink-soft); font-size:1.02rem; }
+  .story-text .pull{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    color:var(--clay);
+    font-size:1.15rem;
+    max-width:44ch;
+    border-left:2px solid var(--clay-soft);
+    padding-left:1.2rem;
+    margin-top:0.4rem;
+  }
+
+  /* ---------- pillars ---------- */
+  .pillars-wrap{
+    background:var(--parchment-2);
+    padding:5rem 2.5rem 5.5rem;
+    text-align:center;
+    position:relative;
+  }
+  .pillars-wrap .eyebrow{ color:var(--clay); display:block; margin-bottom:0.8rem; }
+  .pillars-wrap h2{
+    font-size:clamp(1.9rem, 3.6vw, 2.7rem);
+    font-weight:450;
+    color:var(--root-dark);
+    margin-bottom:0.7rem;
+  }
+  .pillars-wrap .lead{
+    max-width:52ch; margin:0 auto 3.2rem;
+    color:var(--ink-soft);
+    font-size:1.02rem;
+  }
+  .pillars{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1.6rem;
+    max-width:1080px;
+    margin:0 auto;
+  }
+  .pillar{
+    background:var(--cream);
+    border-top:3px solid var(--root-mid);
+    padding:2.4rem 2rem;
+    text-align:left;
+  }
+  .pillar:nth-child(2){ border-top-color:var(--clay); }
+  .pillar:nth-child(3){ border-top-color:var(--root-dark); }
+  .pillar .num{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    color:var(--clay-soft);
+    font-size:0.95rem;
+    display:block;
+    margin-bottom:0.6rem;
+  }
+  .pillar h3{
+    font-family:'Fraunces', serif;
+    font-weight:450;
+    font-size:1.55rem;
+    color:var(--root-dark);
+    margin-bottom:0.5rem;
+  }
+  .pillar .tag{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    color:var(--root-mid);
+    font-size:0.95rem;
+    display:block;
+    margin-bottom:0.8rem;
+  }
+  .pillar p{ color:var(--ink-soft); font-size:0.95rem; }
+
+  /* ---------- outcomes ---------- */
+  .outcomes{
+    background:var(--parchment);
+    padding:5rem 2.5rem;
+  }
+  .outcomes-inner{
+    max-width:760px; margin:0 auto;
+  }
+  .outcome{
+    display:flex; gap:1.2rem;
+    padding:1.6rem 0;
+    border-bottom:1px solid var(--line);
+    align-items:flex-start;
+  }
+  .outcome:first-child{ padding-top:0; }
+  .outcome .mark{ color:var(--clay); font-size:1.1rem; line-height:1.6; }
+  .outcome p{ font-size:1.05rem; color:var(--ink-soft); }
+
+  /* ---------- offer / cta ---------- */
+  .offer{
+    background:var(--root-dark);
+    color:var(--cream);
+    padding:6rem 2.5rem 5rem;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .offer .bgroot{ position:absolute; inset:0; opacity:0.16; }
+  .offer .content{ position:relative; z-index:1; }
+  .offer .eyebrow{ color:var(--clay-soft); display:block; margin-bottom:1rem; }
+  .offer h2{
+    font-size:clamp(2.1rem, 4.4vw, 3.3rem);
+    font-weight:450;
+    max-width:18ch;
+    margin:0 auto 1.3rem;
+    line-height:1.12;
+  }
+  .offer .lead{
+    max-width:50ch; margin:0 auto 2.6rem;
+    font-size:1.05rem;
+    opacity:0.88;
+  }
+  .stats{
+    display:flex; justify-content:center; gap:3.5rem;
+    flex-wrap:wrap;
+    margin-bottom:2.6rem;
+  }
+  .stat .eyebrow{ color:var(--clay-soft); display:block; margin-bottom:0.5rem; opacity:0.85; }
+  .stat .value{
+    font-family:'Fraunces', serif;
+    font-size:1.7rem;
+    font-weight:450;
+  }
+  .stat .sub{ font-size:0.8rem; opacity:0.7; margin-top:0.2rem; font-style:italic; font-family:'Fraunces', serif; }
+  .price{
+    font-family:'Fraunces', serif;
+    font-size:clamp(1.8rem, 4vw, 2.6rem);
+    margin-bottom:2.2rem;
+    line-height:1.3;
+  }
+  .price .placeholder-note{
+    display:block;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--clay-soft);
+    margin-top:0.6rem;
+  }
+  .offer .closing{
+    margin-top:2.6rem;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.05rem;
+    opacity:0.8;
+  }
+
+  /* ---------- footer ---------- */
+  footer{
+    background:#1c2216;
+    color:rgba(248,244,234,0.6);
+    text-align:center;
+    padding:1.6rem;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+  }
+
+  /* placeholder tag used for fields Abigail/Lucas still need to define */
+  .fill{
+    color:var(--clay-soft);
+    font-style:italic;
+    font-family:'Fraunces', serif;
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{
+    opacity:0; transform:translateY(18px);
+    transition:opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 860px){
+    .hero{ grid-template-columns:1fr; min-height:auto; }
+    .hero-visual{ min-height:340px; order:-1; }
+    .hero-text{ padding:3rem 1.6rem; }
+    .story{ grid-template-columns:1fr; }
+    .story-visual{ min-height:280px; }
+    .story-text{ padding:3rem 1.6rem; }
+    .pillars{ grid-template-columns:1fr; }
+    .topbar{ padding:0.9rem 1.4rem; }
+    .stats{ gap:2rem; }
+    .offer{ padding:4.5rem 1.4rem; }
+    .outcomes{ padding:3.5rem 1.4rem; }
+    .pillars-wrap{ padding:3.5rem 1.4rem 4rem; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <span class="tagline">Tu cuerpo ya sabe. Volvé a elegirlo.</span>
+    <a href="#oferta" class="cta-link">Quiero mi lugar →</a>
+  </div>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="eyebrow">Inmersión virtual · <span class="fill">fecha a confirmar</span></span>
+      <h1 class="serif">Volver a<br>Elegirme</h1>
+      <p class="subtitle">El regreso a tu cuerpo, a tu raíz.</p>
+      <p class="desc">Un espacio para dejar de sostener desde el miedo y empezar a elegir desde vos. Cuerpo, conciencia y acción, en ese orden.</p>
+      <p class="fine">Salí de la cabeza. Volvé al cuerpo. La raíz que te sostiene siempre estuvo ahí — solo hace falta escucharla.</p>
+      <a href="#oferta" class="btn">Quiero mi lugar</a>
+    </div>
+    <div class="hero-visual">
+      <svg viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="rootGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f2ece0" stop-opacity="0.25"/>
+            <stop offset="100%" stop-color="#f2ece0" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <g stroke="#f2ece0" stroke-opacity="0.5" stroke-width="1.4" fill="none" stroke-linecap="round">
+          <path d="M300 0 C300 120 260 150 260 260 C260 340 220 360 200 440 C185 500 150 520 120 600"/>
+          <path d="M300 0 C300 120 260 150 260 260 C260 340 300 370 300 460 C300 540 330 560 320 660"/>
+          <path d="M300 0 C300 120 260 150 260 260 C260 340 320 350 380 410 C430 460 460 470 500 540"/>
+          <path d="M260 260 C240 300 210 300 190 340"/>
+          <path d="M260 260 C280 300 300 300 310 350"/>
+          <path d="M200 440 C170 460 150 450 120 470"/>
+          <path d="M300 460 C330 490 350 480 380 510"/>
+        </g>
+        <circle cx="300" cy="4" r="4" fill="#c98a68"/>
+      </svg>
+      <span class="caption">Método Cuerpo Raíz</span>
+    </div>
+  </section>
+
+  <!-- ================= QUOTE ================= -->
+  <section class="quote-banner reveal">
+    <p>&ldquo;No perdiste tu fuerza. Está bajo capas de excusas, de miedo, de costumbre. Cuando dejás de sostener por obligación, empezás a elegir por amor.&rdquo;</p>
+  </section>
+
+  <!-- ================= STORY ================= -->
+  <section class="story">
+    <div class="story-visual reveal">
+      <svg viewBox="0 0 500 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g stroke="#f8f4ea" stroke-opacity="0.55" stroke-width="1.3" fill="none" stroke-linecap="round">
+          <path d="M60 40 C120 90 100 150 160 190 C220 230 210 300 270 330"/>
+          <path d="M40 120 C100 140 110 190 170 210"/>
+          <path d="M270 330 C300 370 290 420 340 460"/>
+          <path d="M270 330 C250 380 200 400 190 450"/>
+          <path d="M160 190 C150 230 110 240 90 280"/>
+        </g>
+        <g fill="#f8f4ea" fill-opacity="0.85">
+          <circle cx="60" cy="40" r="4"/>
+          <circle cx="270" cy="330" r="4"/>
+          <circle cx="340" cy="460" r="3"/>
+        </g>
+      </svg>
+    </div>
+    <div class="story-text reveal">
+      <span class="eyebrow">Lo que pasa</span>
+      <h2 class="serif">Aprendiste a sostener todo, menos a vos.</h2>
+      <p>No de golpe. De a poco, sin darte cuenta. El cuerpo pide una pausa y vos seguís. Frenás cuando ya no queda otra. Te decís que es el frío, el trabajo, el partido, cualquier excusa antes que admitir que hace tiempo dejaste de escucharte.</p>
+      <p>Sostenés por miedo a soltar, no porque elijas sostener. Y mientras tanto, la fuerza — esa que ya tenés — espera bajo capas de mandatos y costumbre.</p>
+      <p class="pull">No necesitás otra explicación. Necesitás un método para volver.</p>
+    </div>
+  </section>
+
+  <!-- ================= PILLARS (Cuerpo · Conciencia · Acción) ================= -->
+  <section class="pillars-wrap reveal">
+    <span class="eyebrow">El método</span>
+    <h2 class="serif">Cuerpo, conciencia y acción.</h2>
+    <p class="lead">Tres ejes que se sostienen entre sí — porque entender no alcanza si el cuerpo no lo vive, y sentir no alcanza si no se convierte en decisión.</p>
+    <div class="pillars">
+      <div class="pillar">
+        <span class="num">I.</span>
+        <h3 class="serif">Cuerpo</h3>
+        <span class="tag">Escuchar lo que ya sabías.</span>
+        <p>Volver a habitar el cuerpo como punto de partida, no como algo que se posterga hasta que duele.</p>
+      </div>
+      <div class="pillar">
+        <span class="num">II.</span>
+        <h3 class="serif">Conciencia</h3>
+        <span class="tag">Comprender tu historia.</span>
+        <p>Ver de dónde vienen los mandatos, las excusas y los sostenes que ya no son tuyos.</p>
+      </div>
+      <div class="pillar">
+        <span class="num">III.</span>
+        <h3 class="serif">Acción</h3>
+        <span class="tag">Elegir desde vos.</span>
+        <p>Convertir lo que se movió en una decisión concreta, sostenida en el tiempo — no en un impulso que se apaga.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= OUTCOMES ================= -->
+  <section class="outcomes reveal">
+    <div class="outcomes-inner">
+      <div class="outcome">
+        <span class="mark">—</span>
+        <p>Prácticas somáticas para seguir escuchando a tu cuerpo después del encuentro.</p>
+      </div>
+      <div class="outcome">
+        <span class="mark">—</span>
+        <p>Herramientas del Método Cuerpo Raíz para reconocer cuándo sostenés por miedo y cuándo elegís por vos.</p>
+      </div>
+      <div class="outcome">
+        <span class="mark">—</span>
+        <p>La experiencia de frenar a tiempo, en vez de esperar a que el cuerpo lo haga por vos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= OFFER / CTA ================= -->
+  <section class="offer" id="oferta">
+    <svg class="bgroot" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <g stroke="#c98a68" stroke-width="1" fill="none" stroke-linecap="round">
+        <path d="M0 400 C100 380 120 340 200 330 C280 320 300 280 380 260 C460 240 480 200 560 190 C640 180 680 140 800 120"/>
+        <path d="M100 400 C160 390 170 360 220 350"/>
+        <path d="M380 260 C400 300 440 300 460 330"/>
+        <path d="M560 190 C580 220 620 220 640 250"/>
+      </g>
+    </svg>
+    <div class="content reveal">
+      <span class="eyebrow">Tu lugar</span>
+      <h2 class="serif">Este puede ser tu primer paso para volver a elegirte.</h2>
+      <p class="lead">No es una charla ni un curso de teoría. Es un espacio para sentir algo real en tu cuerpo, entender de dónde venís y decidir, con conciencia, hacia dónde seguir.</p>
+
+      <div class="stats">
+        <div class="stat">
+          <span class="eyebrow">Fecha</span>
+          <div class="value fill">A confirmar</div>
+        </div>
+        <div class="stat">
+          <span class="eyebrow">Duración</span>
+          <div class="value fill">A confirmar</div>
+          <div class="sub">— hs totales</div>
+        </div>
+        <div class="stat">
+          <span class="eyebrow">Modalidad</span>
+          <div class="value">Virtual</div>
+          <div class="sub">en vivo</div>
+        </div>
+      </div>
+
+      <div class="price">
+        <span class="fill">Precio a confirmar</span>
+        <span class="placeholder-note">completar cuando Abigail defina el valor</span>
+      </div>
+
+      <a href="#" class="btn ghost">Quiero mi lugar</a>
+
+      <p class="closing">Tu cuerpo ya sabe el camino. Dale permiso.</p>
+    </div>
+  </section>
+
+  <footer>
+    Abigail Vajda · Método Cuerpo Raíz · Cuerpo, Conciencia, Acción
+  </footer>
+
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  </script>
+
+</body>
+</html>
