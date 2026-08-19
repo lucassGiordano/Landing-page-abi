@@ -147,9 +147,21 @@
     overflow:hidden;
   }
   .hero-visual svg{ position:absolute; inset:0; width:100%; height:100%; }
+  .hero-photo{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    filter:saturate(0.85) contrast(1.02);
+  }
+  .hero-overlay{
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(44,53,36,0.15) 0%, rgba(44,53,36,0.55) 100%);
+    pointer-events:none;
+  }
   .hero-visual .caption{
     position:absolute; bottom:2rem; right:2rem;
-    color:var(--cream); opacity:0.55;
+    z-index:2;
+    color:var(--cream); opacity:0.75;
     font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase;
     text-align:right;
   }
@@ -181,10 +193,26 @@
   .story-visual{
     position:relative;
     min-height:520px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     background:linear-gradient(200deg, var(--clay-soft) 0%, var(--clay) 60%, var(--root-dark) 130%);
     overflow:hidden;
   }
   .story-visual svg{ position:absolute; inset:0; width:100%; height:100%; }
+  .story-photo{
+    position:relative;
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+    filter:saturate(0.85) contrast(1.02);
+  }
+  .story-overlay{
+    position:absolute; inset:0;
+    background:linear-gradient(200deg, rgba(179,96,63,0.25) 0%, rgba(44,53,36,0.45) 130%);
+    pointer-events:none;
+  }
   .story-text{
     padding:4.5rem 4rem;
     display:flex; flex-direction:column; justify-content:center; gap:1.3rem;
@@ -390,21 +418,23 @@
 
   <div class="topbar">
     <span class="tagline">Tu cuerpo ya sabe. Volvé a elegirlo.</span>
-    <a href="#oferta" class="cta-link">Quiero mi lugar →</a>
+    <a href="#oferta" class="cta-link" data-cta="whatsapp">Quiero mi lugar →</a>
   </div>
 
   <!-- ================= HERO ================= -->
   <section class="hero">
     <div class="hero-text">
-      <span class="eyebrow">Inmersión virtual · <span class="fill">fecha a confirmar</span></span>
+      <span class="eyebrow">Inmersión virtual · Lunes 27 de agosto</span>
       <h1 class="serif">Volver a<br>Elegirme</h1>
       <p class="subtitle">El regreso a tu cuerpo, a tu raíz.</p>
       <p class="desc">Un espacio para dejar de sostener desde el miedo y empezar a elegir desde vos. Cuerpo, conciencia y acción, en ese orden.</p>
       <p class="fine">Salí de la cabeza. Volvé al cuerpo. La raíz que te sostiene siempre estuvo ahí — solo hace falta escucharla.</p>
-      <a href="#oferta" class="btn">Quiero mi lugar</a>
+      <a href="#oferta" class="btn" data-cta="whatsapp">Quiero mi lugar</a>
     </div>
     <div class="hero-visual">
-      <svg viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <!-- FOTO PROFESIONAL: reemplazá img/hero.jpg por tu imagen (recomendado: retrato o foto de práctica, orientación vertical, mín. 1200x1400px) -->
+      <img src="img/hero.jpg" alt="Método Cuerpo Raíz" class="hero-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true" class="hero-fallback" style="display:none;">
         <defs>
           <linearGradient id="rootGrad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#f2ece0" stop-opacity="0.25"/>
@@ -422,6 +452,7 @@
         </g>
         <circle cx="300" cy="4" r="4" fill="#c98a68"/>
       </svg>
+      <div class="hero-overlay"></div>
       <span class="caption">Método Cuerpo Raíz</span>
     </div>
   </section>
@@ -434,7 +465,9 @@
   <!-- ================= STORY ================= -->
   <section class="story">
     <div class="story-visual reveal">
-      <svg viewBox="0 0 500 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <!-- FOTO PROFESIONAL: reemplazá img/story.jpg por tu imagen (recomendado: foto en movimiento/práctica corporal, mín. 1000x1200px) -->
+      <img src="img/story.jpg" alt="" class="story-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <svg viewBox="0 0 500 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true" class="story-fallback" style="display:none;">
         <g stroke="#f8f4ea" stroke-opacity="0.55" stroke-width="1.3" fill="none" stroke-linecap="round">
           <path d="M60 40 C120 90 100 150 160 190 C220 230 210 300 270 330"/>
           <path d="M40 120 C100 140 110 190 170 210"/>
@@ -448,6 +481,7 @@
           <circle cx="340" cy="460" r="3"/>
         </g>
       </svg>
+      <div class="story-overlay"></div>
     </div>
     <div class="story-text reveal">
       <span class="eyebrow">Lo que pasa</span>
@@ -521,12 +555,11 @@
       <div class="stats">
         <div class="stat">
           <span class="eyebrow">Fecha</span>
-          <div class="value fill">A confirmar</div>
+          <div class="value">27 de agosto</div>
         </div>
         <div class="stat">
           <span class="eyebrow">Duración</span>
-          <div class="value fill">A confirmar</div>
-          <div class="sub">— hs totales</div>
+          <div class="value">1 hora</div>
         </div>
         <div class="stat">
           <span class="eyebrow">Modalidad</span>
@@ -540,7 +573,7 @@
         <span class="placeholder-note">completar cuando Abigail defina el valor</span>
       </div>
 
-      <a href="#" class="btn ghost">Quiero mi lugar</a>
+      <a href="#" class="btn ghost" data-cta="whatsapp">Quiero mi lugar</a>
 
       <p class="closing">Tu cuerpo ya sabe el camino. Dale permiso.</p>
     </div>
@@ -551,6 +584,16 @@
   </footer>
 
   <script>
+    // ÚNICO LUGAR PARA EDITAR: pegá acá el link de invitación del grupo de WhatsApp
+    // (Se genera desde WhatsApp → Grupo → Info del grupo → Invitar mediante enlace)
+    const WHATSAPP_LINK = "https://chat.whatsapp.com/LmYHlA4jRIj8IJOqVkKoob?s=cl&p=i&mlu=4";
+
+    document.querySelectorAll('[data-cta="whatsapp"]').forEach(el => {
+      el.href = WHATSAPP_LINK;
+      el.target = "_blank";
+      el.rel = "noopener";
+    });
+
     const revealEls = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
