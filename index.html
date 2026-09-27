@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Volver a Elegirme · Método Cuerpo Raíz</title>
+<title>Cuerpo Raíz · Abigail Vajda</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,450;0,9..144,600;1,9..144,400;1,9..144,500&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -56,22 +56,42 @@
     font-weight:600;
   }
 
-  /* ---------- topbar ---------- */
-  .topbar{
+  /* ---------- site nav ---------- */
+  .site-nav{
     position:sticky; top:0; z-index:50;
     display:flex; align-items:center; justify-content:space-between;
-    padding:1.1rem 2.5rem;
+    padding:1rem 2.5rem;
     background:var(--root-dark);
     color:var(--cream);
+    gap:1.5rem;
   }
-  .topbar .tagline{
+  .site-nav .brand{
+    display:flex; align-items:center; gap:0.65rem;
+    flex-shrink:0;
+  }
+  .site-nav .brand svg{ width:26px; height:26px; flex-shrink:0; }
+  .site-nav .brand span{
     font-family:'Fraunces', serif;
     font-style:italic;
     font-weight:400;
     font-size:0.95rem;
     opacity:0.9;
+    white-space:nowrap;
   }
-  .topbar .cta-link{
+  .site-nav .nav-links{
+    display:flex; align-items:center; gap:1.8rem;
+    list-style:none;
+  }
+  .site-nav .nav-links a{
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    font-weight:600;
+    opacity:0.82;
+    transition:opacity 0.2s ease;
+  }
+  .site-nav .nav-links a:hover, .site-nav .nav-links a.active{ opacity:1; color:var(--clay-soft); }
+  .site-nav .cta-link{
     font-size:0.75rem;
     letter-spacing:0.14em;
     text-transform:uppercase;
@@ -79,49 +99,58 @@
     border-bottom:1px solid var(--clay-soft);
     padding-bottom:2px;
     white-space:nowrap;
-    margin-left:1rem;
+    flex-shrink:0;
   }
-  .topbar .cta-link:hover{ color:var(--clay-soft); }
+  .site-nav .cta-link:hover{ color:var(--clay-soft); }
 
-  /* ---------- hero ---------- */
-  .hero{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    min-height:88vh;
-  }
-  .hero-text{
-    display:flex; flex-direction:column; justify-content:center;
-    padding:4rem 4rem;
-    gap:1.6rem;
+  /* ---------- intro / inicio ---------- */
+  .intro{
     position:relative;
+    min-height:88vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    overflow:hidden;
+    background:linear-gradient(200deg, var(--root-mid) 0%, var(--root-dark) 100%);
   }
-  .hero-text .eyebrow{ color:var(--clay); }
-  .hero-text h1{
-    font-size:clamp(2.6rem, 5vw, 4.2rem);
-    font-weight:450;
-    line-height:1.04;
-    color:var(--root-dark);
+  .intro-photo{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    filter:saturate(0.85) contrast(1.02);
   }
-  .hero-text .subtitle{
+  .intro-overlay{
+    position:absolute; inset:0;
+    background:radial-gradient(60% 60% at 50% 42%, rgba(44,53,36,0.45) 0%, rgba(28,34,22,0.88) 100%);
+    pointer-events:none;
+  }
+  .intro-content{
+    position:relative; z-index:1;
+    max-width:760px;
+    padding:3rem 1.8rem;
+    display:flex; flex-direction:column; align-items:center; gap:1.3rem;
+    color:var(--cream);
+  }
+  .intro-content .eyebrow{ color:var(--clay-soft); }
+  .intro-content h1{
     font-family:'Fraunces', serif;
-    font-style:italic;
-    font-size:1.35rem;
-    color:var(--clay);
-    font-weight:400;
+    font-size:clamp(2.4rem, 5.2vw, 3.8rem);
+    font-weight:450;
+    line-height:1.1;
   }
-  .hero-text p.desc{
-    max-width:34ch;
-    font-size:1.02rem;
-    color:var(--ink-soft);
+  .intro-content .desc{
+    max-width:54ch;
+    font-size:1.08rem;
+    opacity:0.92;
   }
-  .hero-text .fine{
-    font-size:0.72rem;
-    letter-spacing:0.06em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-    max-width:36ch;
-    line-height:1.7;
+  .intro-ctas{
+    display:flex; align-items:center; gap:1.4rem;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin-top:0.8rem;
   }
+
   .btn{
     display:inline-block;
     background:var(--root-dark);
@@ -133,6 +162,7 @@
     font-weight:600;
     width:fit-content;
     transition:background 0.25s ease, transform 0.25s ease;
+    border:1px solid transparent;
   }
   .btn:hover{ background:var(--clay); transform:translateY(-1px); }
   .btn.ghost{
@@ -141,451 +171,816 @@
   }
   .btn.ghost:hover{ background:var(--cream); color:var(--root-dark); }
 
-  .hero-visual{
-    position:relative;
-    background:linear-gradient(160deg, var(--root-mid) 0%, var(--root-dark) 100%);
-    overflow:hidden;
+  /* ---------- generic section styling ---------- */
+  .section-padding{ padding:5.5rem 2.5rem; }
+  .section-head{
+    text-align:center;
+    max-width:680px;
+    margin:0 auto 3.5rem;
   }
-  .hero-visual svg{ position:absolute; inset:0; width:100%; height:100%; }
-  .hero-photo{
-    position:absolute; inset:0;
-    width:100%; height:100%;
-    object-fit:cover;
-    filter:saturate(0.85) contrast(1.02);
+  .section-head .eyebrow{ color:var(--clay); display:block; margin-bottom:0.8rem; }
+  .section-head h2{
+    font-size:clamp(2rem, 3.8vw, 3rem);
+    font-weight:450;
+    color:var(--root-dark);
+    line-height:1.1;
+    margin-bottom:1rem;
   }
-  .hero-overlay{
-    position:absolute; inset:0;
-    background:linear-gradient(180deg, rgba(44,53,36,0.15) 0%, rgba(44,53,36,0.55) 100%);
-    pointer-events:none;
-  }
-  .hero-visual .caption{
-    position:absolute; bottom:2rem; right:2rem;
-    z-index:2;
-    color:var(--cream); opacity:0.75;
-    font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase;
-    text-align:right;
-  }
+  .section-head p{ color:var(--ink-soft); font-size:1.05rem; }
 
   /* ---------- quote banner ---------- */
   .quote-banner{
     background:var(--root-mid);
     color:var(--cream);
     text-align:center;
-    padding:3.2rem 2rem;
+    padding:3.5rem 2rem;
   }
   .quote-banner p{
     font-family:'Fraunces', serif;
     font-style:italic;
     font-weight:400;
     font-size:clamp(1.2rem, 2.4vw, 1.7rem);
-    max-width:44ch;
+    max-width:48ch;
     margin:0 auto;
     line-height:1.5;
   }
 
-  /* ---------- story section ---------- */
-  .story{
+  /* ---------- 2 caminos overview ---------- */
+  .caminos-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
-    align-items:stretch;
-    background:var(--parchment);
-  }
-  .story-visual{
-    position:relative;
-    min-height:520px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(200deg, var(--clay-soft) 0%, var(--clay) 60%, var(--root-dark) 130%);
-    overflow:hidden;
-  }
-  .story-visual svg{ position:absolute; inset:0; width:100%; height:100%; }
-  .story-photo{
-    position:relative;
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    display:block;
-    filter:saturate(0.85) contrast(1.02);
-  }
-  .story-overlay{
-    position:absolute; inset:0;
-    background:linear-gradient(200deg, rgba(179,96,63,0.25) 0%, rgba(44,53,36,0.45) 130%);
-    pointer-events:none;
-  }
-  .story-text{
-    padding:4.5rem 4rem;
-    display:flex; flex-direction:column; justify-content:center; gap:1.3rem;
-  }
-  .story-text .eyebrow{ color:var(--root-mid); }
-  .story-text h2{
-    font-size:clamp(2rem, 3.6vw, 2.9rem);
-    font-weight:450;
-    color:var(--root-dark);
-    line-height:1.08;
-  }
-  .story-text p{ max-width:52ch; color:var(--ink-soft); font-size:1.02rem; }
-  .story-text .pull{
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    color:var(--clay);
-    font-size:1.15rem;
-    max-width:44ch;
-    border-left:2px solid var(--clay-soft);
-    padding-left:1.2rem;
-    margin-top:0.4rem;
-  }
-
-  /* ---------- pillars ---------- */
-  .pillars-wrap{
-    background:var(--parchment-2);
-    padding:5rem 2.5rem 5.5rem;
-    text-align:center;
-    position:relative;
-  }
-  .pillars-wrap .eyebrow{ color:var(--clay); display:block; margin-bottom:0.8rem; }
-  .pillars-wrap h2{
-    font-size:clamp(1.9rem, 3.6vw, 2.7rem);
-    font-weight:450;
-    color:var(--root-dark);
-    margin-bottom:0.7rem;
-  }
-  .pillars-wrap .lead{
-    max-width:52ch; margin:0 auto 3.2rem;
-    color:var(--ink-soft);
-    font-size:1.02rem;
-  }
-  .pillars{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:1.6rem;
+    gap:2rem;
     max-width:1080px;
     margin:0 auto;
   }
-  .pillar{
+  .camino-card{
     background:var(--cream);
-    border-top:3px solid var(--root-mid);
-    padding:2.4rem 2rem;
-    text-align:left;
+    padding:3rem 2.5rem;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    border-top:4px solid var(--root-mid);
   }
-  .pillar:nth-child(2){ border-top-color:var(--clay); }
-  .pillar:nth-child(3){ border-top-color:var(--root-dark); }
-  .pillar .num{
+  .camino-card.individual{ border-top-color:var(--clay); }
+  .camino-card h3{
     font-family:'Fraunces', serif;
-    font-style:italic;
-    color:var(--clay-soft);
-    font-size:0.95rem;
-    display:block;
-    margin-bottom:0.6rem;
-  }
-  .pillar h3{
-    font-family:'Fraunces', serif;
-    font-weight:450;
-    font-size:1.55rem;
+    font-size:1.8rem;
     color:var(--root-dark);
     margin-bottom:0.5rem;
   }
-  .pillar .tag{
+  .camino-card .badge{
+    font-size:0.75rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    font-weight:600;
+    color:var(--clay);
+    margin-bottom:1.2rem;
+    display:block;
+  }
+  .camino-card p{ color:var(--ink-soft); font-size:1rem; margin-bottom:1.5rem; }
+
+  /* ---------- method steps ---------- */
+  .steps-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:1.2rem;
+    max-width:1100px;
+    margin:3rem auto;
+  }
+  .step-card{
+    background:var(--cream);
+    padding:2rem 1.5rem;
+    border-bottom:3px solid var(--root-mid);
+  }
+  .step-card .num{
     font-family:'Fraunces', serif;
     font-style:italic;
-    color:var(--root-mid);
-    font-size:0.95rem;
+    color:var(--clay);
+    font-size:1.1rem;
+    margin-bottom:0.5rem;
     display:block;
-    margin-bottom:0.8rem;
   }
-  .pillar p{ color:var(--ink-soft); font-size:0.95rem; }
+  .step-card h4{
+    font-family:'Fraunces', serif;
+    font-size:1.25rem;
+    color:var(--root-dark);
+    margin-bottom:0.6rem;
+  }
+  .step-card p{ font-size:0.92rem; color:var(--ink-soft); }
 
-  /* ---------- outcomes ---------- */
-  .outcomes{
-    background:var(--parchment);
-    padding:5rem 2.5rem;
-  }
-  .outcomes-inner{
-    max-width:760px; margin:0 auto;
-  }
-  .outcome{
-    display:flex; gap:1.2rem;
-    padding:1.6rem 0;
-    border-bottom:1px solid var(--line);
-    align-items:flex-start;
-  }
-  .outcome:first-child{ padding-top:0; }
-  .outcome .mark{ color:var(--clay); font-size:1.1rem; line-height:1.6; }
-  .outcome p{ font-size:1.05rem; color:var(--ink-soft); }
-
-  /* ---------- offer / cta ---------- */
-  .offer{
+  /* ---------- pantera banner ---------- */
+  .pantera-box{
+    max-width:900px;
+    margin:4rem auto 0;
     background:var(--root-dark);
     color:var(--cream);
-    padding:6rem 2.5rem 5rem;
-    text-align:center;
-    position:relative;
-    overflow:hidden;
+    padding:3rem 2.5rem;
+    display:flex;
+    align-items:center;
+    gap:2rem;
   }
-  .offer .bgroot{ position:absolute; inset:0; opacity:0.16; }
-  .offer .content{ position:relative; z-index:1; }
-  .offer .eyebrow{ color:var(--clay-soft); display:block; margin-bottom:1rem; }
-  .offer h2{
-    font-size:clamp(2.1rem, 4.4vw, 3.3rem);
-    font-weight:450;
-    max-width:18ch;
-    margin:0 auto 1.3rem;
-    line-height:1.12;
+  .pantera-img{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--parchment-2);
+    border: 2px solid var(--clay-soft);
   }
-  .offer .lead{
-    max-width:50ch; margin:0 auto 2.6rem;
-    font-size:1.05rem;
-    opacity:0.88;
+  .pantera-box h3{ font-family:'Fraunces', serif; font-size:1.6rem; margin-bottom:0.6rem; color:var(--clay-soft); }
+  .pantera-box p{ font-size:0.98rem; opacity:0.9; }
+
+  /* ---------- program details ---------- */
+  .checklist{
+    list-style:none;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1rem;
+    max-width:900px;
+    margin:2rem auto 3.5rem;
   }
-  .stats{
-    display:flex; justify-content:center; gap:3.5rem;
-    flex-wrap:wrap;
-    margin-bottom:2.6rem;
+  .checklist li{
+    background:var(--cream);
+    padding:1.1rem 1.3rem;
+    font-size:0.95rem;
+    color:var(--ink-soft);
+    display:flex;
+    align-items:flex-start;
+    gap:0.8rem;
   }
-  .stat .eyebrow{ color:var(--clay-soft); display:block; margin-bottom:0.5rem; opacity:0.85; }
-  .stat .value{
-    font-family:'Fraunces', serif;
-    font-size:1.7rem;
-    font-weight:450;
-  }
-  .stat .sub{ font-size:0.8rem; opacity:0.7; margin-top:0.2rem; font-style:italic; font-family:'Fraunces', serif; }
-  .price{
-    font-family:'Fraunces', serif;
-    font-size:clamp(1.8rem, 4vw, 2.6rem);
-    margin-bottom:2.2rem;
-    line-height:1.3;
-  }
-  .price .placeholder-note{
-    display:block;
-    font-family:'Work Sans', sans-serif;
-    font-size:0.68rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--clay-soft);
-    margin-top:0.6rem;
-  }
-  .offer .closing{
-    margin-top:2.6rem;
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    font-size:1.05rem;
-    opacity:0.8;
+  .checklist li::before{
+    content:"✓";
+    color:var(--clay);
+    font-weight:bold;
   }
 
-  /* ---------- footer ---------- */
+  .includes-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1.5rem;
+    max-width:1080px;
+    margin:0 auto;
+  }
+  .include-card{
+    background:var(--cream);
+    padding:2rem 1.6rem;
+    border-left:3px solid var(--clay-soft);
+  }
+  .include-card h4{
+    font-family:'Fraunces', serif;
+    font-size:1.2rem;
+    color:var(--root-dark);
+    margin-bottom:0.5rem;
+  }
+  .include-card p{ font-size:0.92rem; color:var(--ink-soft); }
+
+  .program-meta-box{
+    background:var(--parchment-2);
+    border:1px solid var(--line);
+    padding:2.5rem;
+    max-width:700px;
+    margin:3.5rem auto 0;
+    text-align:center;
+  }
+  .program-meta-box .price{
+    font-family:'Fraunces', serif;
+    font-size:2.2rem;
+    color:var(--root-dark);
+    margin:1rem 0;
+  }
+
+  /* ---------- sobre mi ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1.2fr;
+    gap:3.5rem;
+    align-items:center;
+    max-width:1080px;
+    margin:0 auto;
+  }
+  .about-photo{
+    width:100%;
+    height:auto;
+    border-radius:2px;
+    filter:saturate(0.9);
+  }
+  .about-text h2{
+    font-size:2.4rem;
+    color:var(--root-dark);
+    margin-bottom:0.5rem;
+  }
+  .about-text .credentials{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    color:var(--clay);
+    font-size:1.1rem;
+    margin-bottom:1.5rem;
+    display:block;
+  }
+  .about-text p{ color:var(--ink-soft); font-size:1.02rem; margin-bottom:1rem; }
+
+  /* ---------- testimonios carrusel ---------- */
+  .testimonials-container{
+    margin-top: 4rem;
+    padding-top: 3.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .testimonial-carousel-wrapper {
+    position: relative;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+  .testimonial-carousel {
+    overflow: hidden;
+    width: 100%;
+  }
+  .testimonial-track {
+    display: flex;
+    transition: transform 0.4s ease-in-out;
+  }
+  .testimonial-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+  }
+  .testimonial-card{
+    background: var(--cream);
+    padding: 2.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+    border-left: 4px solid var(--clay);
+    min-height: 220px;
+  }
+  .testimonial-photo{
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: var(--parchment-2);
+    border: 2px solid var(--clay-soft);
+  }
+  .testimonial-content p{
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    font-style: italic;
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+  }
+  .testimonial-author{
+    display: block;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--root-dark);
+  }
+
+  /* Flechas Carrusel */
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--root-dark);
+    color: var(--cream);
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    font-size: 1.2rem;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .carousel-arrow:hover {
+    background: var(--clay);
+    transform: translateY(-50%) scale(1.05);
+  }
+  .carousel-arrow.prev { left: 0; }
+  .carousel-arrow.next { right: 0; }
+
+  /* Indicadores Carrusel */
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1.8rem;
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--parchment-2);
+    border: 1px solid var(--root-mid);
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  .dot.active {
+    background: var(--clay);
+    border-color: var(--clay);
+  }
+
+  /* ---------- page system ---------- */
+  .page{ display:none; }
+  .page.active{ display:block; }
+
   footer{
     background:#1c2216;
     color:rgba(248,244,234,0.6);
     text-align:center;
-    padding:1.6rem;
-    font-size:0.72rem;
+    padding:2rem;
+    font-size:0.75rem;
     letter-spacing:0.08em;
     text-transform:uppercase;
   }
 
-  /* placeholder tag used for fields Abigail/Lucas still need to define */
-  .fill{
-    color:var(--clay-soft);
-    font-style:italic;
-    font-family:'Fraunces', serif;
-  }
-
-  /* ---------- reveal on scroll ---------- */
-  .reveal{
-    opacity:0; transform:translateY(18px);
-    transition:opacity 0.8s ease, transform 0.8s ease;
-  }
-  .reveal.in{ opacity:1; transform:translateY(0); }
-
-  /* ---------- responsive ---------- */
+  /* responsive */
   @media (max-width: 860px){
-    .hero{ grid-template-columns:1fr; min-height:auto; }
-    .hero-visual{ min-height:340px; order:-1; }
-    .hero-text{ padding:3rem 1.6rem; }
-    .story{ grid-template-columns:1fr; }
-    .story-visual{ min-height:280px; }
-    .story-text{ padding:3rem 1.6rem; }
-    .pillars{ grid-template-columns:1fr; }
-    .topbar{ padding:0.9rem 1.4rem; }
-    .stats{ gap:2rem; }
-    .offer{ padding:4.5rem 1.4rem; }
-    .outcomes{ padding:3.5rem 1.4rem; }
-    .pillars-wrap{ padding:3.5rem 1.4rem 4rem; }
+    .site-nav{ padding:0.9rem 1.4rem; }
+    .site-nav .nav-links{ display:none; }
+    .caminos-grid, .steps-grid, .checklist, .includes-grid, .about-grid{ grid-template-columns:1fr; }
+    .testimonial-carousel-wrapper { padding: 0 1rem; }
+    .testimonial-card{ flex-direction: column; text-align: center; padding: 2rem 1.2rem; }
+    .carousel-arrow { position: relative; top: auto; transform: none; margin: 0 0.5rem; }
+    .carousel-arrow:hover { transform: scale(1.05); }
+    .mobile-controls { display: flex; justify-content: center; margin-top: 1rem; }
+    .pantera-box{ flex-direction:column; text-align:center; }
+    .section-padding{ padding:3.5rem 1.4rem; }
   }
 </style>
 </head>
 <body>
 
-  <div class="topbar">
-    <span class="tagline">Tu cuerpo ya sabe. Volvé a elegirlo.</span>
-    <a href="#oferta" class="cta-link" data-cta="whatsapp">Quiero mi lugar →</a>
+  <nav class="site-nav">
+    <a href="#page-inicio" class="brand nav-page-link">
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <g stroke="#f2ece0" stroke-width="1.6" fill="none" stroke-linecap="round">
+          <path d="M20 2 C20 12 15 15 15 24 C15 30 11 32 9 38"/>
+          <path d="M20 2 C20 12 15 15 15 24 C15 30 22 33 22 38"/>
+          <path d="M15 24 C22 26 24 24 29 27"/>
+        </g>
+        <circle cx="20" cy="2" r="2.4" fill="#c98a68"/>
+      </svg>
+      <span>Cuerpo Raíz</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#page-inicio" class="nav-page-link">Inicio</a></li>
+      <li><a href="#page-metodo" class="nav-page-link">El Método</a></li>
+      <li><a href="#page-grupal" class="nav-page-link">Volver a Vos (Grupal)</a></li>
+      <li><a href="#page-individual" class="nav-page-link">Individual</a></li>
+      <li><a href="#page-sobre-mi" class="nav-page-link">Sobre Mí</a></li>
+      <li><a href="#page-contacto" class="nav-page-link">Contacto</a></li>
+    </ul>
+    <a href="#" class="cta-link" data-cta="whatsapp">Consultar por WhatsApp →</a>
+  </nav>
+
+  <!-- ================= INICIO ================= -->
+  <div class="page active" id="page-inicio">
+    <section class="intro">
+      <img src="img/fondoMain.jpg" alt="Cuerpo Raíz" class="intro-photo" onerror="this.style.display='none';">
+      <div class="intro-overlay"></div>
+      <div class="intro-content">
+        <span class="eyebrow">🌿 Cuerpo Raíz · Abigail Vajda</span>
+        <h1 class="serif">Volvé a escucharte.<br>Tu cuerpo también tiene respuestas.</h1>
+        <p class="desc">¿Hace cuánto tiempo venís estando para todos y dejando para después lo que te pasa a vos? Quizás estás cansada de sostener, resolver y cumplir. Y aunque sabés que necesitás un cambio, la cabeza no tiene todas las respuestas.</p>
+        <div class="intro-ctas">
+          <a href="#page-grupal" class="btn nav-page-link">Programa Grupal (8 Semanas)</a>
+          <a href="#page-individual" class="btn ghost nav-page-link">Acompañamiento Individual</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-banner">
+      <p>&ldquo;Pensamos. Analizamos. Intentamos entender. Pero hay algo que muchas veces dejamos afuera: EL CUERPO TAMBIÉN HABLA.&rdquo;</p>
+    </section>
+
+    <section class="section-padding">
+      <div class="section-head">
+        <span class="eyebrow">Dos caminos para volver a vos</span>
+        <h2 class="serif">Cada mujer está en un momento diferente</h2>
+        <p>Por eso, hoy podés recorrer este proceso de dos maneras diseñadas según tus necesidades actuales.</p>
+      </div>
+
+      <div class="caminos-grid">
+        <div class="camino-card">
+          <div>
+            <span class="badge">Proceso Grupal</span>
+            <h3 class="serif">Volver a Vos</h3>
+            <p>Un proceso de 8 semanas para mujeres que quieren volver a escucharse, conectar con su cuerpo y transformar lo que descubren en acciones concretas junto a otras mujeres.</p>
+          </div>
+          <a href="#page-grupal" class="btn nav-page-link">Ver Programa Grupal</a>
+        </div>
+
+        <div class="camino-card individual">
+          <div>
+            <span class="badge">Proceso Personalizado</span>
+            <h3 class="serif">Acompañamiento Individual</h3>
+            <p>Un espacio 1 a 1 para trabajar sobre lo que hoy estás viviendo a tu propio ritmo, desde la palabra, la arteterapia, el movimiento y el yoga.</p>
+          </div>
+          <a href="#page-individual" class="btn nav-page-link" style="background:var(--clay);">Ver Acompañamiento 1 a 1</a>
+        </div>
+      </div>
+
+      <!-- COMPONENTE CARRUSEL UNIFICADO -->
+      <div class="testimonials-container">
+        <div class="section-head" style="margin-bottom:2.5rem;">
+          <span class="eyebrow">Experiencias y Transformación</span>
+          <h3 class="serif" style="font-size:2rem; color:var(--root-dark);">Lo que dicen quienes ya pasaron por el proceso</h3>
+        </div>
+
+        <div class="testimonial-carousel-wrapper">
+          <button class="carousel-arrow prev" aria-label="Anterior">&#10094;</button>
+          
+          <div class="testimonial-carousel">
+            <div class="testimonial-track">
+              <!-- Slide 1: Maiky -->
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <img src="img/maiky.jpg" alt="Foto Maiky" class="testimonial-photo" onerror="this.src='https://via.placeholder.com/95?text=Maiky';">
+                  <div class="testimonial-content">
+                    <p>&ldquo;Mi recorrido con Abi fue hace algunos años pero aún hoy tiene impacto en mi vida. A mis 18 años me acerqué a ella con el deseo de que me ayude a entender qué estudiar. Con el tiempo empecé a entender que eso iría apareciendo de a poco, pero para que eso suceda, necesité de su espacio para amigarme con mis emociones, para darles nombre, color, textura. Un espacio de mucho amor que me contuvo en ese momento de tanta angustia e incertidumbre. Recuerdo que con ella pude empezar a abrirme de formas que no había podido hacer antes, construimos un espacio juntas de introspección, cariño, siempre con un té de por medio. Estoy muy agradecida de haberme encontrado con su espacio en un momento tan definitivo de mi vida. Hoy por hoy estudio la carrera más hermosa del mundo y mi relación con mis emociones es un proceso consciente y amoroso. Gracias Abi!&rdquo;</p>
+                    <span class="testimonial-author">— Maiky</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 2: Sabrina -->
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <img src="img/sabrina.jpg" alt="Foto Sabrina" class="testimonial-photo" onerror="this.src='https://via.placeholder.com/95?text=Sabrina';">
+                  <div class="testimonial-content">
+                    <p>&ldquo;Hago Arteterapia con Abi desde hace 10 años. En ese proceso aprendí mucho sobre mi misma, a entenderme, comprender mis tiempos y necesidades y respetarlos. Abi hace bien! y por eso la sigo eligiendo como terapeuta. Hace un año y medio que hago yoga con ella también. Fue una experiencia muy reveladora para mi, porque descubrí que me ayuda no solo a mi cuerpo físico, sino tambien a mi mente y mi alma. Las clases son al estilo de Abi, personalizadas y con mucho amor. Abi está siempre atenta a cada detalle, con la palabra justa y buscando siempre distintas formas de ayudarme a crecer. ¡Gracias, Abi!&rdquo;</p>
+                    <span class="testimonial-author">— Sabrina</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 3: Rosa María -->
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <img src="img/rosamaria.jpg" alt="Foto Rosa María" class="testimonial-photo" onerror="this.src='https://via.placeholder.com/95?text=Rosa+M.';">
+                  <div class="testimonial-content">
+                    <p>&ldquo;Este año comencé en el Taller de meditación junto a Abi y a un grupo maravilloso, un camino para aprender a observarme sin juzgarme y siento que de a poco logro ver mis pensamientos sin forzar mi mente. Gracias&rdquo;</p>
+                    <span class="testimonial-author">— Rosa María Herman</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 4: Caro -->
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <img src="img/caro.jpg" alt="Foto Caro" class="testimonial-photo" onerror="this.src='https://via.placeholder.com/95?text=Caro';">
+                  <div class="testimonial-content">
+                    <p>&ldquo;Las puertas de Abi las abrí en 2018 gracias a mi amiga que me la recomendó. Fue un recorrido colmado de escucha, sostén, aprendizaje, vivencias y mucha entrega. Encontré en ella lo que mi vida necesitaba en aquel momento. Fueron 7 años de crecimiento para mí y sé que esa puerta sigue abierta para volver alguna vez. Te quiero mucho Abi. Gracias por haber sido parte de mi vida!&rdquo;</p>
+                    <span class="testimonial-author">— Caro</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <button class="carousel-arrow next" aria-label="Siguiente">&#10095;</button>
+          
+          <div class="carousel-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
-  <!-- ================= HERO ================= -->
-  <section class="hero">
-    <div class="hero-text">
-      <span class="eyebrow">Inmersión virtual · Lunes 31 de agosto a 19hs ARG</span>
-      <h1 class="serif">Volver a<br>Elegirme</h1>
-      <p class="subtitle">El regreso a tu cuerpo, a tu raíz.</p>
-      <p class="desc">Un espacio para dejar de sostener desde el miedo y empezar a elegir desde vos. Cuerpo, conciencia y acción, en ese orden.</p>
-      <p class="fine">Salí de la cabeza. Volvé al cuerpo. La raíz que te sostiene siempre estuvo ahí — solo hace falta escucharla.</p>
-      <a href="#oferta" class="btn" data-cta="whatsapp">Quiero mi lugar</a>
-    </div>
-    <div class="hero-visual">
-      <!-- FOTO PROFESIONAL: reemplazá img/hero.jpg por tu imagen (recomendado: retrato o foto de práctica, orientación vertical, mín. 1200x1400px) -->
-      <img src="img/hero.jpg" alt="Método Cuerpo Raíz" class="hero-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-      <svg viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice" aria-hidden="true" class="hero-fallback" style="display:none;">
-        <defs>
-          <linearGradient id="rootGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#f2ece0" stop-opacity="0.25"/>
-            <stop offset="100%" stop-color="#f2ece0" stop-opacity="0"/>
-          </linearGradient>
-        </defs>
-        <g stroke="#f2ece0" stroke-opacity="0.5" stroke-width="1.4" fill="none" stroke-linecap="round">
-          <path d="M300 0 C300 120 260 150 260 260 C260 340 220 360 200 440 C185 500 150 520 120 600"/>
-          <path d="M300 0 C300 120 260 150 260 260 C260 340 300 370 300 460 C300 540 330 560 320 660"/>
-          <path d="M300 0 C300 120 260 150 260 260 C260 340 320 350 380 410 C430 460 460 470 500 540"/>
-          <path d="M260 260 C240 300 210 300 190 340"/>
-          <path d="M260 260 C280 300 300 300 310 350"/>
-          <path d="M200 440 C170 460 150 450 120 470"/>
-          <path d="M300 460 C330 490 350 480 380 510"/>
-        </g>
-        <circle cx="300" cy="4" r="4" fill="#c98a68"/>
-      </svg>
-      <div class="hero-overlay"></div>
-      <span class="caption">Método Cuerpo Raíz</span>
-    </div>
-  </section>
-
-  <!-- ================= QUOTE ================= -->
-  <section class="quote-banner reveal">
-    <p>&ldquo;No perdiste tu fuerza. Está bajo capas de excusas, de miedo, de costumbre. Cuando dejás de sostener por obligación, empezás a elegir por amor.&rdquo;</p>
-  </section>
-
-  <!-- ================= STORY ================= -->
-  <section class="story">
-    <div class="story-visual reveal">
-      <!-- FOTO PROFESIONAL: reemplazá img/story.jpg por tu imagen (recomendado: foto en movimiento/práctica corporal, mín. 1000x1200px) -->
-      <img src="img/story.jpg" alt="" class="story-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-      <svg viewBox="0 0 500 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true" class="story-fallback" style="display:none;">
-        <g stroke="#f8f4ea" stroke-opacity="0.55" stroke-width="1.3" fill="none" stroke-linecap="round">
-          <path d="M60 40 C120 90 100 150 160 190 C220 230 210 300 270 330"/>
-          <path d="M40 120 C100 140 110 190 170 210"/>
-          <path d="M270 330 C300 370 290 420 340 460"/>
-          <path d="M270 330 C250 380 200 400 190 450"/>
-          <path d="M160 190 C150 230 110 240 90 280"/>
-        </g>
-        <g fill="#f8f4ea" fill-opacity="0.85">
-          <circle cx="60" cy="40" r="4"/>
-          <circle cx="270" cy="330" r="4"/>
-          <circle cx="340" cy="460" r="3"/>
-        </g>
-      </svg>
-      <div class="story-overlay"></div>
-    </div>
-    <div class="story-text reveal">
-      <span class="eyebrow">Lo que pasa</span>
-      <h2 class="serif">Aprendiste a sostener todo, menos a vos.</h2>
-      <p>No de golpe. De a poco, sin darte cuenta. El cuerpo pide una pausa y vos seguís. Frenás cuando ya no queda otra. Te decís que es el frío, el trabajo, el partido, cualquier excusa antes que admitir que hace tiempo dejaste de escucharte.</p>
-      <p>Sostenés por miedo a soltar, no porque elijas sostener. Y mientras tanto, la fuerza — esa que ya tenés — espera bajo capas de mandatos y costumbre.</p>
-      <p class="pull">No necesitás otra explicación. Necesitás un método para volver.</p>
-    </div>
-  </section>
-
-  <!-- ================= PILLARS (Cuerpo · Conciencia · Acción) ================= -->
-  <section class="pillars-wrap reveal">
-    <span class="eyebrow">El método</span>
-    <h2 class="serif">Cuerpo, conciencia y acción.</h2>
-    <p class="lead">Tres ejes que se sostienen entre sí — porque entender no alcanza si el cuerpo no lo vive, y sentir no alcanza si no se convierte en decisión.</p>
-    <div class="pillars">
-      <div class="pillar">
-        <span class="num">I.</span>
-        <h3 class="serif">Cuerpo</h3>
-        <span class="tag">Escuchar lo que ya sabías.</span>
-        <p>Volver a habitar el cuerpo como punto de partida, no como algo que se posterga hasta que duele.</p>
+  <!-- ================= EL MÉTODO ================= -->
+  <div class="page" id="page-metodo">
+    <section class="section-padding">
+      <div class="section-head">
+        <span class="eyebrow">🌿 ¿Qué es Cuerpo Raíz?</span>
+        <h2 class="serif">Una forma de acompañarte a volver a vos</h2>
+        <p>No se trata solamente de hablar sobre lo que te pasa. Se trata de poder reconocerlo también en tu cuerpo. Saber que algo tiene que cambiar no siempre alcanza; por eso integramos diferentes caminos para transformar la información en movimiento.</p>
       </div>
-      <div class="pillar">
-        <span class="num">II.</span>
-        <h3 class="serif">Conciencia</h3>
-        <span class="tag">Comprender tu historia.</span>
-        <p>Ver de dónde vienen los mandatos, las excusas y los sostenes que ya no son tuyos.</p>
-      </div>
-      <div class="pillar">
-        <span class="num">III.</span>
-        <h3 class="serif">Acción</h3>
-        <span class="tag">Elegir desde vos.</span>
-        <p>Convertir lo que se movió en una decisión concreta, sostenida en el tiempo — no en un impulso que se apaga.</p>
-      </div>
-    </div>
-  </section>
 
-  <!-- ================= OUTCOMES ================= -->
-  <section class="outcomes reveal">
-    <div class="outcomes-inner">
-      <div class="outcome">
-        <span class="mark">—</span>
-        <p>Prácticas somáticas para seguir escuchando a tu cuerpo después del encuentro.</p>
-      </div>
-      <div class="outcome">
-        <span class="mark">—</span>
-        <p>Herramientas del Método Cuerpo Raíz para reconocer cuándo sostenés por miedo y cuándo elegís por vos.</p>
-      </div>
-      <div class="outcome">
-        <span class="mark">—</span>
-        <p>La experiencia de frenar a tiempo, en vez de esperar a que el cuerpo lo haga por vos.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= OFFER / CTA ================= -->
-  <section class="offer" id="oferta">
-    <svg class="bgroot" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <g stroke="#c98a68" stroke-width="1" fill="none" stroke-linecap="round">
-        <path d="M0 400 C100 380 120 340 200 330 C280 320 300 280 380 260 C460 240 480 200 560 190 C640 180 680 140 800 120"/>
-        <path d="M100 400 C160 390 170 360 220 350"/>
-        <path d="M380 260 C400 300 440 300 460 330"/>
-        <path d="M560 190 C580 220 620 220 640 250"/>
-      </g>
-    </svg>
-    <div class="content reveal">
-      <span class="eyebrow">Tu lugar</span>
-      <h2 class="serif">Este puede ser tu primer paso para volver a elegirte.</h2>
-      <p class="lead">No es una charla ni un curso de teoría. Es un espacio para sentir algo real en tu cuerpo, entender de dónde venís y decidir, con conciencia, hacia dónde seguir.</p>
-
-      <div class="stats">
-        <div class="stat">
-          <span class="eyebrow">Fecha</span>
-          <div class="value">31 de agosto a 19hs ARG</div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="num">01.</span>
+          <h4 class="serif">Palabra</h4>
+          <p>Primero ponemos en palabras lo que estás viviendo y transitando hoy.</p>
         </div>
-        <div class="stat">
-          <span class="eyebrow">Duración</span>
-          <div class="value">1 hora</div>
+        <div class="step-card">
+          <span class="num">02.</span>
+          <h4 class="serif">Cuerpo</h4>
+          <p>Aprendemos a registrar cómo eso aparece y se manifiesta en tu cuerpo.</p>
         </div>
-        <div class="stat">
-          <span class="eyebrow">Modalidad</span>
-          <div class="value">Virtual</div>
-          <div class="sub">en vivo</div>
+        <div class="step-card">
+          <span class="num">03.</span>
+          <h4 class="serif">Reconocimiento</h4>
+          <p>Exploramos y sentimos qué información real aparece desde el registro somático.</p>
+        </div>
+        <div class="step-card">
+          <span class="num">04.</span>
+          <h4 class="serif">Acción</h4>
+          <p>Nos preguntamos: ¿Qué puedo hacer diferente con esto que ahora sé de mí?</p>
         </div>
       </div>
 
-      <div class="price">
-        <span class="fill">Clase Gratuita</span>
+      <div class="pantera-box">
+        <img src="img/pantera.jpg" alt="Foto Pantera" class="pantera-img" onerror="this.src='https://via.placeholder.com/90?text=Pantera';">
+        <div>
+          <h3 class="serif">Ahí aparece la Pantera</h3>
+          <p>La Pantera representa esa parte tuya que puede avanzar. La que recupera su fuerza, reconoce lo que necesita, toma decisiones y deja de quedarse solamente pensando para empezar a moverse.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= PROGRAMA GRUPAL ================= -->
+  <div class="page" id="page-grupal">
+    <section class="section-padding">
+      <div class="section-head">
+        <span class="eyebrow">🌿 Programa Grupal Virtual</span>
+        <h2 class="serif">Volver a Vos · 8 Semanas</h2>
+        <p>Un espacio para frenar, escucharte, registrar dónde estás hoy, conectar con tu cuerpo y transformar tus descubrimientos en acciones concretas.</p>
       </div>
 
-      <a href="#" class="btn ghost" data-cta="whatsapp">Quiero mi lugar</a>
+      <h3 class="serif" style="text-align:center; margin-bottom:1.5rem; color:var(--root-dark);">Este programa es para vos si...</h3>
+      <ul class="checklist">
+        <li>Sentís que estás cansada de sostener demasiado.</li>
+        <li>Hace tiempo estás para todos, pero no sabés qué necesitás vos.</li>
+        <li>Sentís que algo en tu vida ya no te representa de la misma manera.</li>
+        <li>Te cuesta poner límites o tomar decisiones.</li>
+        <li>Sabés muchas cosas sobre vos, pero te cuesta hacer algo diferente.</li>
+        <li>Querés volver a conectar con tu cuerpo y tener un espacio para vos.</li>
+        <li>Querés iniciar un proceso de transformación acompañada por otras mujeres.</li>
+      </ul>
 
-      <p class="closing">Tu cuerpo ya sabe el camino. Dale permiso.</p>
-    </div>
-  </section>
+      <div class="section-head" style="margin-top:4rem; margin-bottom:2rem;">
+        <span class="eyebrow">¿Qué incluye Volver a Vos?</span>
+      </div>
+
+      <div class="includes-grid">
+        <div class="include-card">
+          <h4 class="serif">8 Encuentros Grupales</h4>
+          <p>Virtuales, 1 encuentro por semana (1 hora y media de duración) para compartir y explorar.</p>
+        </div>
+        <div class="include-card">
+          <h4 class="serif">Yoga y Meditación</h4>
+          <p>Clases de yoga virtuales grabadas y prácticas de meditación para realizar a tus propios tiempos.</p>
+        </div>
+        <div class="include-card">
+          <h4 class="serif">3 Encuentros 1 a 1</h4>
+          <p>Sesiones individuales de 30 minutos durante el proceso para profundizar de manera personalizada.</p>
+        </div>
+        <div class="include-card">
+          <h4 class="serif">Grupo Privado</h4>
+          <p>Acompañamiento constante vía WhatsApp para sostenerte y guiarte durante las 8 semanas.</p>
+        </div>
+        <div class="include-card">
+          <h4 class="serif">Herramientas Integradas</h4>
+          <p>Trabajo con Arteterapia, Movimiento, Yoga, Meditación y Trabajo corporal sin necesidad de experiencia previa.</p>
+        </div>
+        <div class="include-card">
+          <h4 class="serif">Paso a la Acción</h4>
+          <p>Estructura orientada a transformar descubrimientos en decisiones reales para tu vida.</p>
+        </div>
+      </div>
+
+      <!-- SECCIÓN TESTIMONIOS (MISMO CARRUSEL) -->
+      <div class="testimonials-container">
+        <div class="section-head" style="margin-bottom:2.5rem;">
+          <span class="eyebrow">Experiencias y Transformación</span>
+          <h3 class="serif" style="font-size:2rem; color:var(--root-dark);">Lo que dicen quienes ya pasaron por el proceso</h3>
+        </div>
+
+        <div class="testimonial-carousel-wrapper">
+          <button class="carousel-arrow prev" aria-label="Anterior">&#10094;</button>
+          
+          <div class="testimonial-carousel">
+            <div class="testimonial-track">
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <img src="img/maiky.jpg" alt="Foto Maiky" class="testimonial-photo" onerror="this.src='https://via.placeholder.com/95?text=Maiky';">
+                  <div class="testimonial-content">
+                    <p>&ldquo;Mi recorrido con Abi fue hace algunos años pero aún hoy tiene impacto en mi vida. A mis 18 años me acerqué a ella con el deseo de que me ayude a entender qué estudiar. Con el tiempo empecé a entender que eso iría apareciendo de a poco, pero para que eso suceda, necesité de su espacio para amigarme con mis emociones, para darles nombre, color, textura. Un espacio de mucho amor que me contuvo en ese momento de tanta angustia e incertidumbre. Recuerdo que con ella pude empezar a abrirme de formas que no había podido hacer antes, construimos un espacio juntas de introspección, cariño, siempre con un té de por medio. Estoy muy agradecida de haberme encontrado con su espacio en un momento tan definitivo de mi vida. Hoy por hoy estudio la carrera más hermosa del mundo y mi relación con mis emociones es un proceso consciente y amoroso. Gracias Abi!&rdquo;</p>
+                    <span class="testimonial-author">— Maiky</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <img src="img/sabrina.jpg" alt="Foto Sabrina" class="testimonial-photo" onerror="this.src='https://via.placeholder.com/95?text=Sabrina';">
+                  <div class="testimonial-content">
+                    <p>&ldquo;Hago Arteterapia con Abi desde hace 10 años. En ese proceso aprendí mucho sobre mi misma, a entenderme, comprender mis tiempos y necesidades y respetarlos. Abi hace bien! y por eso la sigo eligiendo como terapeuta. Hace un año y medio que hago yoga con ella también. Fue una experiencia muy reveladora para mi, porque descubrí que me ayuda no solo a mi cuerpo físico, sino tambien a mi mente y mi alma. Las clases son al estilo de Abi, personalizadas y con mucho amor. Abi está siempre atenta a cada detalle, con la palabra justa y buscando siempre distintas formas de ayudarme a crecer. ¡Gracias, Abi!&rdquo;</p>
+                    <span class="testimonial-author">— Sabrina</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <img src="img/rosamaria.jpg" alt="Foto Rosa María" class="testimonial-photo" onerror="this.src='https://via.placeholder.com/95?text=Rosa+M.';">
+                  <div class="testimonial-content">
+                    <p>&ldquo;Este año comencé en el Taller de meditación junto a Abi y a un grupo maravilloso, un camino para aprender a observarme sin juzgarme y siento que de a poco logro ver mis pensamientos sin forzar mi mente. Gracias&rdquo;</p>
+                    <span class="testimonial-author">— Rosa María Herman</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <img src="img/caro.jpg" alt="Foto Caro" class="testimonial-photo" onerror="this.src='https://via.placeholder.com/95?text=Caro';">
+                  <div class="testimonial-content">
+                    <p>&ldquo;Las puertas de Abi las abrí en 2018 gracias a mi amiga que me la recomendó. Fue un recorrido colmado de escucha, sostén, aprendizaje, vivencias y mucha entrega. Encontré en ella lo que mi vida necesitaba en aquel momento. Fueron 7 años de crecimiento para mí y sé que esa puerta sigue abierta para volver alguna vez. Te quiero mucho Abi. Gracias por haber sido parte de mi vida!&rdquo;</p>
+                    <span class="testimonial-author">— Caro</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="carousel-arrow next" aria-label="Siguiente">&#10095;</button>
+
+          <div class="carousel-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="program-meta-box">
+        <span class="eyebrow">Información del Programa</span>
+        <div class="price">USD 300</div>
+        <p><strong>Inicio:</strong> Lunes 21 de septiembre · 100% Virtual</p>
+        <p style="font-size:0.88rem; color:var(--ink-soft); margin-top:0.5rem;">Consulta por opciones de pago disponibles.</p>
+        <a href="#" class="btn" data-cta="whatsapp" style="margin-top:1.5rem;">Quiero recibir información sobre Volver a Vos</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= ACOMPAÑAMIENTO INDIVIDUAL (ACTUALIZADO) ================= -->
+  <div class="page" id="page-individual">
+    <section class="section-padding">
+      <div class="section-head">
+        <span class="eyebrow">Proceso Personalizado</span>
+        <h2 class="serif">Acompañamiento Individual</h2>
+        <p>El Espacio Individual es para vos si sentís que hay algo en tu vida que necesita ser mirado.<br><br>Quizás no podés explicar exactamente qué te pasa. O quizás sí sabés lo que te está pasando, pero sentís que <strong>entenderlo no está siendo suficiente para transformarlo</strong>.</p>
+      </div>
+
+      <h3 class="serif" style="text-align:center; margin-bottom:1.5rem; color:var(--root-dark);">🌿 Este espacio puede ser para vos si:</h3>
+      <ul class="checklist">
+        <li>Estás atravesando un momento de cambio o dificultad y necesitás acompañamiento.</li>
+        <li>Sentís que estás desconectada de vos misma y no sabés bien qué necesitás.</li>
+        <li>Hay situaciones, emociones o formas de vincularte que se repiten y querés comprenderlas de otra manera.</li>
+        <li>Te cuesta poner en palabras todo lo que sentís.</li>
+        <li>Sentís que tu cuerpo está expresando algo que necesitás aprender a escuchar.</li>
+        <li>Sabés que algo necesita cambiar, pero no encontrás cómo empezar.</li>
+        <li>Estás cansada de pensar demasiado y necesitás conectar también con lo que sentís.</li>
+        <li>Querés regalarte un espacio propio, donde puedas frenar y volver a mirarte.</li>
+      </ul>
+
+      <!-- BLOQUE DE TEXTO DESTACADO -->
+      <div style="max-width:850px; margin:3.5rem auto; background:var(--cream); padding:3rem 2.5rem; border-left:4px solid var(--clay); text-align:center;">
+        <span class="eyebrow" style="color:var(--clay); display:block; margin-bottom:0.5rem;">Caminar Juntas</span>
+        <h3 class="serif" style="font-size:1.8rem; color:var(--root-dark); margin-bottom:1rem;">NO TENÉS QUE LLEGAR CON LAS RESPUESTAS</h3>
+        <p style="color:var(--ink-soft); font-size:1.02rem; margin-bottom:0.5rem;">No necesitás saber exactamente qué te pasa.</p>
+        <p style="color:var(--ink-soft); font-size:1.02rem; margin-bottom:0.5rem;">No necesitás tener claro qué querés trabajar.</p>
+        <p style="color:var(--ink-soft); font-size:1.02rem; margin-bottom:1.5rem;">No necesitás saber por dónde empezar.</p>
+
+        <h4 class="serif" style="font-size:1.35rem; color:var(--root-dark); margin-bottom:1.2rem;">Ese camino lo vamos construyendo juntas.</h4>
+        <p style="color:var(--ink-soft); font-size:1rem; max-width:680px; margin:0 auto 1.2rem;">Partimos de tu momento actual. De lo que hoy está presente en tu vida. De aquello que aparece cuando empezamos a darle espacio a la palabra, al cuerpo, al movimiento y a la experiencia.</p>
+        <p style="color:var(--ink-soft); font-size:1rem; margin-bottom:1.8rem;">Porque a veces, el primer paso no es saber exactamente hacia dónde ir...</p>
+
+        <div style="background:var(--parchment-2); padding:1.2rem 1.5rem; border-radius:4px; display:inline-block;">
+          <p style="font-size:1.08rem; font-weight:600; color:var(--root-dark);">El primer paso es darte un espacio para empezar a escucharte.</p>
+          <p style="color:var(--clay); font-weight:600; margin-top:0.4rem; font-size:1.05rem;">🐆 Y desde ahí, construir un camino posible para vos.</p>
+        </div>
+      </div>
+
+      <!-- SECCIÓN TESTIMONIOS (MISMO CARRUSEL) -->
+      <div class="testimonials-container" style="margin-top:2rem; border-top:1px solid var(--line); padding-top:3.5rem;">
+        <div class="section-head" style="margin-bottom:2.5rem;">
+          <span class="eyebrow">Experiencias y Transformación</span>
+          <h3 class="serif" style="font-size:2rem; color:var(--root-dark);">Lo que dicen quienes ya pasaron por el proceso</h3>
+        </div>
+
+        <div class="testimonial-carousel-wrapper">
+          <button class="carousel-arrow prev" aria-label="Anterior">&#10094;</button>
+          
+          <div class="testimonial-carousel">
+            <div class="testimonial-track">
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <img src="img/maiky.jpg" alt="Foto Maiky" class="testimonial-photo" onerror="this.src='https://via.placeholder.com/95?text=Maiky';">
+                  <div class="testimonial-content">
+                    <p>&ldquo;Mi recorrido con Abi fue hace algunos años pero aún hoy tiene impacto en mi vida. A mis 18 años me acerqué a ella con el deseo de que me ayude a entender qué estudiar. Con el tiempo empecé a entender que eso iría apareciendo de a poco, pero para que eso suceda, necesité de su espacio para amigarme con mis emociones, para darles nombre, color, textura. Un espacio de mucho amor que me contuvo en ese momento de tanta angustia e incertidumbre. Recuerdo que con ella pude empezar a abrirme de formas que no había podido hacer antes, construimos un espacio juntas de introspección, cariño, siempre con un té de por medio. Estoy muy agradecida de haberme encontrado con su espacio en un momento tan definitivo de mi vida. Hoy por hoy estudio la carrera más hermosa del mundo y mi relación con mis emociones es un proceso consciente y amoroso. Gracias Abi!&rdquo;</p>
+                    <span class="testimonial-author">— Maiky</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <img src="img/sabrina.jpg" alt="Foto Sabrina" class="testimonial-photo" onerror="this.src='https://via.placeholder.com/95?text=Sabrina';">
+                  <div class="testimonial-content">
+                    <p>&ldquo;Hago Arteterapia con Abi desde hace 10 años. En ese proceso aprendí mucho sobre mi misma, a entenderme, comprender mis tiempos y necesidades y respetarlos. Abi hace bien! y por eso la sigo eligiendo como terapeuta. Hace un año y medio que hago yoga con ella también. Fue una experiencia muy reveladora para mi, porque descubrí que me ayuda no solo a mi cuerpo físico, sino tambien a mi mente y mi alma. Las clases son al estilo de Abi, personalizadas y con mucho amor. Abi está siempre atenta a cada detalle, con la palabra justa y buscando siempre distintas formas de ayudarme a crecer. ¡Gracias, Abi!&rdquo;</p>
+                    <span class="testimonial-author">— Sabrina</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <img src="img/rosamaria.jpg" alt="Foto Rosa María" class="testimonial-photo" onerror="this.src='https://via.placeholder.com/95?text=Rosa+M.';">
+                  <div class="testimonial-content">
+                    <p>&ldquo;Este año comencé en el Taller de meditación junto a Abi y a un grupo maravilloso, un camino para aprender a observarme sin juzgarme y siento que de a poco logro ver mis pensamientos sin forzar mi mente. Gracias&rdquo;</p>
+                    <span class="testimonial-author">— Rosa María Herman</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testimonial-slide">
+                <div class="testimonial-card">
+                  <img src="img/caro.jpg" alt="Foto Caro" class="testimonial-photo" onerror="this.src='https://via.placeholder.com/95?text=Caro';">
+                  <div class="testimonial-content">
+                    <p>&ldquo;Las puertas de Abi las abrí en 2018 gracias a mi amiga que me la recomendó. Fue un recorrido colmado de escucha, sostén, aprendizaje, vivencias y mucha entrega. Encontré en ella lo que mi vida necesitaba en aquel momento. Fueron 7 años de crecimiento para mí y sé que esa puerta sigue abierta para volver alguna vez. Te quiero mucho Abi. Gracias por haber sido parte de mi vida!&rdquo;</p>
+                    <span class="testimonial-author">— Caro</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class="carousel-arrow next" aria-label="Siguiente">&#10095;</button>
+
+          <div class="carousel-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="program-meta-box" style="margin-top:4rem;">
+        <span class="eyebrow">Detalles del Acompañamiento</span>
+        <div class="price">USD 30 <span style="font-size:1rem; font-weight:normal;">/ encuentro</span></div>
+        <p><strong>Modalidad:</strong> Virtual (1 hora semanal)</p>
+        <p><strong>Duración mínima:</strong> 4 encuentros</p>
+        <p style="font-size:0.85rem; color:var(--ink-soft); margin-top:0.8rem;">Un proceso requiere tiempo y continuidad. La cantidad de encuentros posteriores se adapta a cada persona.</p>
+        <a href="#" class="btn" data-cta="whatsapp" style="margin-top:1.5rem; background:var(--clay);">Consultar por Acompañamiento Individual</a>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= SOBRE MÍ ================= -->
+  <div class="page" id="page-sobre-mi">
+    <section class="section-padding">
+      <div class="about-grid">
+        <img src="img/hero.jpg" alt="Abigail Vajda" class="about-photo" onerror="this.style.display='none';">
+        <div class="about-text">
+          <span class="eyebrow">Sobre Mí</span>
+          <h2 class="serif">Soy Abigail Vajda</h2>
+          <span class="credentials">Arteterapeuta · Danza Movimiento Terapeuta · Profesora de Yoga & Yogaterapia · Profesora de Meditación</span>
+          <p>Durante mi camino fui comprendiendo algo que hoy es la base de mi trabajo: <strong>No todas las respuestas aparecen solamente cuando hablamos.</strong></p>
+          <p>El cuerpo también tiene memoria, información, sensaciones y mensajes. Cuando aprendemos a escucharlo, podemos empezar a comprendernos de una manera diferente.</p>
+          <p>Por eso creé <strong>Cuerpo Raíz</strong>. Mi intención no es decirte qué tenés que hacer con tu vida, sino acompañarte para que puedas volver a escucharte, reconocer dónde estás, descubrir qué necesitás y encontrar la fuerza para moverte hacia eso.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= CONTACTO ================= -->
+  <div class="page" id="page-contacto">
+    <section class="section-padding">
+      <div class="section-head">
+        <span class="eyebrow">Contacto</span>
+        <h2 class="serif">Podés volver a vos. Y no tenés que hacerlo sola.</h2>
+        <p>Escribime para conversar sobre qué estás necesitando hoy y definir juntas cuál de los dos caminos es el indicado para vos.</p>
+      </div>
+
+      <div style="text-align:center; display:flex; flex-direction:column; align-items:center; gap:1.2rem;">
+        <a href="#" class="btn" data-cta="whatsapp" style="padding:1.2rem 2.5rem; font-size:0.85rem;">Escribime directamente por WhatsApp →</a>
+      </div>
+    </section>
+  </div>
 
   <footer>
-    Abigail Vajda · Método Cuerpo Raíz · Cuerpo, Conciencia, Acción
+    Abigail Vajda · Cuerpo Raíz · Palabra, Cuerpo, Reconocimiento, Acción
   </footer>
 
   <script>
-    // ÚNICO LUGAR PARA EDITAR: pegá acá el link de invitación del grupo de WhatsApp
-    // (Se genera desde WhatsApp → Grupo → Info del grupo → Invitar mediante enlace)
-    const WHATSAPP_LINK = "https://chat.whatsapp.com/LmYHlA4jRIj8IJOqVkKoob?s=cl&p=i&mlu=4";
+    const WHATSAPP_LINK = "https://wa.me/5491135035080?text=Hola%20Abigail,%20quisiera%20recibir%20m%C3%A1s%20informaci%C3%B3n%20sobre%20Cuerpo%20Ra%C3%ADz";
 
     document.querySelectorAll('[data-cta="whatsapp"]').forEach(el => {
       el.href = WHATSAPP_LINK;
@@ -593,14 +988,62 @@
       el.rel = "noopener";
     });
 
-    const revealEls = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.15 });
-    revealEls.forEach(el => io.observe(el));
-  </script>
+    /* NAVEGACIÓN ENTRE PÁGINAS */
+    const pages = document.querySelectorAll('.page');
+    const pageLinks = document.querySelectorAll('.nav-page-link');
+    const pageIds = Array.from(pages).map(p => p.id);
 
+    function showPage(id){
+      if (!pageIds.includes(id)) id = 'page-inicio';
+      pages.forEach(p => p.classList.toggle('active', p.id === id));
+      pageLinks.forEach(l => {
+        const href = l.getAttribute('href');
+        l.classList.toggle('active', href === '#' + id);
+      });
+      window.scrollTo(0, 0);
+    }
+
+    function goToHash(){
+      const id = location.hash.replace('#', '') || 'page-inicio';
+      showPage(id);
+    }
+
+    pageLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const targetId = link.getAttribute('href');
+        if (targetId && targetId.startsWith('#page-')) {
+          e.preventDefault();
+          const id = targetId.slice(1);
+          if (location.hash !== '#' + id) history.pushState(null, '', '#' + id);
+          showPage(id);
+        }
+      });
+    });
+
+    window.addEventListener('popstate', goToHash);
+    goToHash();
+
+    /* LÓGICA DE CARRUSELES */
+    document.querySelectorAll('.testimonial-carousel-wrapper').forEach(wrapper => {
+      const track = wrapper.querySelector('.testimonial-track');
+      const slides = wrapper.querySelectorAll('.testimonial-slide');
+      const prevBtn = wrapper.querySelector('.carousel-arrow.prev');
+      const nextBtn = wrapper.querySelector('.carousel-arrow.next');
+      const dots = wrapper.querySelectorAll('.dot');
+      let currentIndex = 0;
+
+      function updateCarousel(index) {
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+        currentIndex = index;
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', () => updateCarousel(currentIndex - 1));
+      if (nextBtn) nextBtn.addEventListener('click', () => updateCarousel(currentIndex + 1));
+      dots.forEach((dot, i) => dot.addEventListener('click', () => updateCarousel(i)));
+    });
+  </script>
 </body>
 </html>
