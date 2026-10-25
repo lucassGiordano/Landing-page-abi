@@ -50,6 +50,9 @@ export default function Login() {
       <p style={{ margin: 0 }}>
         ¿No tenés cuenta? <Link to="/registro">Crear cuenta</Link>
       </p>
+            <p style={{ margin: 0 }}>
+        <Link to="/recuperar">¿Olvidaste tu contraseña?</Link>
+      </p>
     </form>
   )
 }
