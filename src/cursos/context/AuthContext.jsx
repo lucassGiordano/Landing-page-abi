@@ -6,6 +6,7 @@ const AuthContext = createContext(null)
 export function AuthProvider({ children }) {
   const [session, setSession] = useState(null)
   const [profile, setProfile] = useState(null)
+  const [profileUserId, setProfileUserId] = useState(null)
   const [loading, setLoading] = useState(true)
 
   // Sesión: la lee al cargar y se actualiza sola al entrar/salir
@@ -25,21 +26,34 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     if (!userId) {
       setProfile(null)
+      setProfileUserId(null)
       return
     }
+    let cancelled = false
     supabase
       .from('profiles')
       .select('role, display_name')
       .eq('id', userId)
       .single()
-      .then(({ data }) => setProfile(data))
+      .then(({ data }) => {
+        if (cancelled) return
+        setProfile(data ?? null)
+        setProfileUserId(userId)
+      })
+    return () => {
+      cancelled = true
+    }
   }, [userId])
+
+  // true mientras hay usuario pero su perfil todavía no terminó de cargar
+  const profileLoading = Boolean(userId) && profileUserId !== userId
 
   const value = {
     session,
     user: session?.user ?? null,
     profile,
     loading,
+    profileLoading,
     isAdmin: profile?.role === 'admin',
   }
 

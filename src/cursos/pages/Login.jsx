@@ -1,9 +1,18 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase.js'
+import { useAuth } from '../context/AuthContext.jsx'
 
 export default function Login() {
   const navigate = useNavigate()
+    const location = useLocation()
+  const { user } = useAuth()
+  const destino = location.state?.from || '/'
+
+  // Si hay sesión (recién ingresó o ya la tenía), va al destino
+  useEffect(() => {
+    if (user) navigate(destino, { replace: true })
+  }, [user, destino, navigate])
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -23,7 +32,6 @@ export default function Login() {
       )
       return
     }
-    navigate('/')
   }
 
   return (

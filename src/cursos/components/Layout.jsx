@@ -13,6 +13,8 @@ export default function Layout() {
           <Link to="/">Catálogo</Link>
           {loading ? null : user ? (
             <>
+              <Link to="/mis-cursos">Mis cursos</Link>
+              {profile?.role === 'admin' && <Link to="/admin">Admin</Link>}
               <span>
                 {profile?.display_name || user.email}
                 {profile?.role === 'admin' ? ' (admin)' : ''}

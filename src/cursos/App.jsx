@@ -5,6 +5,10 @@ import Login from './pages/Login.jsx'
 import Registro from './pages/Registro.jsx'
 import Recuperar from './pages/Recuperar.jsx'
 import NuevaContrasena from './pages/NuevaContrasena.jsx'
+import RequireAuth from './components/RequireAuth.jsx'
+import RequireAdmin from './components/RequireAdmin.jsx'
+import MisCursos from './pages/MisCursos.jsx'
+import AdminHome from './pages/admin/AdminHome.jsx'
 
 function Catalogo() {
   return <p>Catálogo (próximamente)</p>
@@ -20,6 +24,12 @@ export default function App() {
           <Route path="/registro" element={<Registro />} />
           <Route path="/recuperar" element={<Recuperar />} />
           <Route path="/nueva-contrasena" element={<NuevaContrasena />} />
+          <Route element={<RequireAuth />}>
+          <Route path="/mis-cursos" element={<MisCursos />} />
+          </Route>
+          <Route element={<RequireAdmin />}>
+          <Route path="/admin" element={<AdminHome />} />
+          </Route>
           <Route path="*" element={<p>Página no encontrada</p>} />
         </Route>
       </Routes>
