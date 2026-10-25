@@ -1,39 +1,24 @@
-import { useEffect, useState } from 'react'
-import { Routes, Route, Link } from 'react-router-dom'
-import { supabase } from './lib/supabase.js'
+import { Routes, Route } from 'react-router-dom'
+import { AuthProvider } from './context/AuthContext.jsx'
+import Layout from './components/Layout.jsx'
+import Login from './pages/Login.jsx'
+import Registro from './pages/Registro.jsx'
 
-function PruebaConexion() {
-  const [estado, setEstado] = useState('Probando conexión...')
-
-  useEffect(() => {
-        supabase
-      .from('courses')
-      .select('id')
-      .then(({ data, error }) => {
-        setEstado(
-          error
-            ? 'Error: ' + error.message
-            : `Conexión OK. Cursos publicados visibles: ${data.length}`,
-        )
-      })
-  }, [])
-
-  return <p>{estado}</p>
+function Catalogo() {
+  return <p>Catálogo (próximamente)</p>
 }
 
 export default function App() {
   return (
-    <div style={{ padding: 24, fontFamily: 'sans-serif' }}>
-      <h1>Sección de cursos</h1>
-      <nav style={{ display: 'flex', gap: 12 }}>
-        <Link to="/">Catálogo</Link>
-        <Link to="/login">Ingresar</Link>
-      </nav>
+    <AuthProvider>
       <Routes>
-        <Route path="/" element={<PruebaConexion />} />
-        <Route path="/login" element={<p>Pantalla de login (próximamente)</p>} />
-        <Route path="*" element={<p>Página no encontrada</p>} />
+        <Route element={<Layout />}>
+          <Route path="/" element={<Catalogo />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/registro" element={<Registro />} />
+          <Route path="*" element={<p>Página no encontrada</p>} />
+        </Route>
       </Routes>
-    </div>
+    </AuthProvider>
   )
 }
