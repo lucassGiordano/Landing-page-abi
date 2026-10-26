@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router-dom'
 import { supabase } from '../../lib/supabase.js'
 import { slugify } from '../../lib/format.js'
 import { borrarArchivos } from '../../lib/storageCleanup.js'
+import VideoPlayer from '../../components/VideoPlayer.jsx'
+import { extraerIdYoutube } from '../../lib/video.js'
 
 const TIPOS = { text: 'Texto', pdf: 'PDF', doc: 'Documento', image: 'Imagen', video: 'Video' }
 
@@ -50,13 +52,14 @@ export default function ContenidosPage() {
   const [form, setForm] = useState(null)
   const [borrarId, setBorrarId] = useState(null)
   const [enlace, setEnlace] = useState(null) // { id, url }
+  const [videoVisibleId, setVideoVisibleId] = useState(null)
 
   async function cargar() {
     const [m, c] = await Promise.all([
       supabase.from('modules').select('id, title, course_id').eq('id', moduleId).single(),
       supabase
         .from('contents')
-        .select('id, type, title, position, body_md, storage_path')
+        .select('id, type, title, position, body_md, storage_path, video_provider, video_ref')
         .eq('module_id', moduleId)
         .order('position'),
     ])
@@ -139,6 +142,29 @@ export default function ContenidosPage() {
     }
 
     setBusy(false)
+    setForm(null)
+    cargar()
+  }
+
+    async function guardarVideo(e) {
+    e.preventDefault()
+    const title = form.title.trim()
+    if (!title) return setError('El título es obligatorio.')
+    const ref = extraerIdYoutube(form.url)
+    if (!ref)
+      return setError('No reconozco ese enlace de YouTube. Pegá la dirección completa del video.')
+    setError('')
+    setBusy(true)
+    const { error } = await supabase.from('contents').insert({
+      module_id: moduleId,
+      position: siguientePosicion(),
+      type: 'video',
+      title,
+      video_provider: 'youtube',
+      video_ref: ref,
+    })
+    setBusy(false)
+    if (error) return setError('No se pudo guardar el video: ' + error.message)
     setForm(null)
     cargar()
   }
@@ -247,6 +273,17 @@ export default function ContenidosPage() {
                       </button>{' '}
                     </>
                   )}
+
+                  {c.type === 'video' && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => setVideoVisibleId(videoVisibleId === c.id ? null : c.id)}
+                      >
+                        {videoVisibleId === c.id ? 'Ocultar' : 'Ver'}
+                      </button>{' '}
+                    </>
+                  )}
                   {c.storage_path && (
                     <>
                       <button type="button" onClick={() => verArchivo(c)} disabled={busy}>
@@ -267,6 +304,11 @@ export default function ContenidosPage() {
                   <small>(el enlace vence en 60 segundos)</small>
                 </div>
               )}
+              {videoVisibleId === c.id && (
+                <div style={{ marginTop: 8, maxWidth: 480 }}>
+                  <VideoPlayer provider={c.video_provider} videoRef={c.video_ref} title={c.title} />
+                </div>
+              )}
             </li>
           ))}
         </ol>
@@ -282,6 +324,9 @@ export default function ContenidosPage() {
           </button>
           <button type="button" onClick={() => setForm({ kind: 'file', title: '', file: null })}>
             + Agregar archivo
+          </button>
+          <button type="button" onClick={() => setForm({ kind: 'video', title: '', url: '' })}>
+            + Agregar video
           </button>
         </div>
       )}
@@ -360,6 +405,59 @@ export default function ContenidosPage() {
             <button
               type="button"
               disabled={busy}
+              onClick={() => {
+                setForm(null)
+                setError('')
+              }}
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+        
+      )}
+
+      {form?.kind === 'video' && (
+        <form
+          onSubmit={guardarVideo}
+          style={{ display: 'grid', gap: 12, maxWidth: 560, marginTop: 16 }}
+        >
+          <h4 style={{ margin: 0 }}>Nuevo video</h4>
+          <label>
+            Título (lo que verá el alumno)
+            <input
+              style={{ display: 'block', width: '100%' }}
+              value={form.title}
+              onChange={(e) => setForm({ ...form, title: e.target.value })}
+            />
+          </label>
+          <label>
+            Proveedor
+            <select style={{ display: 'block' }} defaultValue="youtube">
+              <option value="youtube">YouTube (no listado)</option>
+              <option value="r2" disabled>
+                Cloudflare R2 (próximamente)
+              </option>
+              <option value="bunny" disabled>
+                Bunny Stream (próximamente)
+              </option>
+            </select>
+          </label>
+          <label>
+            Enlace del video de YouTube
+            <input
+              style={{ display: 'block', width: '100%' }}
+              placeholder="https://www.youtube.com/watch?v=..."
+              value={form.url}
+              onChange={(e) => setForm({ ...form, url: e.target.value })}
+            />
+          </label>
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button type="submit" disabled={busy}>
+              {busy ? 'Guardando...' : 'Guardar'}
+            </button>
+            <button
+              type="button"
               onClick={() => {
                 setForm(null)
                 setError('')
