@@ -103,7 +103,7 @@ export default function CursoForm() {
       </p>
       <h3 style={{ margin: 0 }}>{esNuevo ? 'Nuevo curso' : 'Editar curso'}</h3>
       {!esNuevo && <p style={{ margin: 0 }}>Estado: {status === 'published' ? 'Publicado' : 'Borrador'}</p>}
-
+      {!esNuevo && (<p style={{ margin: 0 }}><Link to={`/admin/cursos/${id}/modulos`}>Gestionar módulos →</Link></p>)}
       <label>
         Título
         <input

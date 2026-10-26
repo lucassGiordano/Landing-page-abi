@@ -72,6 +72,7 @@ export default function CursosList() {
                 <td>{c.status === 'published' ? 'Publicado' : 'Borrador'}</td>
                 <td style={{ display: 'flex', gap: 8, padding: '6px 0' }}>
                   <Link to={`/admin/cursos/${c.id}`}>Editar</Link>
+                  <Link to={`/admin/cursos/${c.id}/modulos`}>Módulos</Link>
                   <button onClick={() => cambiarEstado(c)}>
                     {c.status === 'published' ? 'Despublicar' : 'Publicar'}
                   </button>
