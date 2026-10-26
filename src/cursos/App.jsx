@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext.jsx'
 import Layout from './components/Layout.jsx'
 import Login from './pages/Login.jsx'
@@ -8,7 +8,9 @@ import NuevaContrasena from './pages/NuevaContrasena.jsx'
 import RequireAuth from './components/RequireAuth.jsx'
 import RequireAdmin from './components/RequireAdmin.jsx'
 import MisCursos from './pages/MisCursos.jsx'
-import AdminHome from './pages/admin/AdminHome.jsx'
+import AdminLayout from './pages/admin/AdminLayout.jsx'
+import CursosList from './pages/admin/CursosList.jsx'
+import CursoForm from './pages/admin/CursoForm.jsx'
 
 function Catalogo() {
   return <p>Catálogo (próximamente)</p>
@@ -28,7 +30,12 @@ export default function App() {
           <Route path="/mis-cursos" element={<MisCursos />} />
           </Route>
           <Route element={<RequireAdmin />}>
-          <Route path="/admin" element={<AdminHome />} />
+          <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<Navigate to="cursos" replace />} />
+          <Route path="cursos" element={<CursosList />} />
+          <Route path="cursos/nuevo" element={<CursoForm key="nuevo" />} />
+          <Route path="cursos/:id" element={<CursoForm key="editar" />} />
+          </Route>
           </Route>
           <Route path="*" element={<p>Página no encontrada</p>} />
         </Route>

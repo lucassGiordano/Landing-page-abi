@@ -9,4 +9,4 @@ export default function RequireAdmin() {
   if (!user) return <Navigate to="/login" replace state={{ from: location.pathname }} />
   if (!isAdmin) return <Navigate to="/" replace />
   return <Outlet />
-}
+}   

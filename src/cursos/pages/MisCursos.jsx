@@ -32,7 +32,6 @@ export default function MisCursos() {
     <div>
       <h2>Mis cursos</h2>
       <p>Todavía no tenés cursos comprados.</p>
-      <PruebaPermisos />
     </div>
   )
 }
