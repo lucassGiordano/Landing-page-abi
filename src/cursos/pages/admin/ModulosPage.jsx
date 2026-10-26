@@ -1,6 +1,8 @@
+import { archivosDeModulo, borrarArchivos } from '../../lib/storageCleanup.js'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { supabase } from '../../lib/supabase.js'
+
 
 export default function ModulosPage() {
   const { id } = useParams()
@@ -80,7 +82,9 @@ export default function ModulosPage() {
     if (!window.confirm(`¿Eliminar el módulo "${m.title}" y todo su contenido?`)) return
     setError('')
     setBusy(true)
+    const rutas = await archivosDeModulo(m.id)
     const { error } = await supabase.from('modules').delete().eq('id', m.id)
+    await borrarArchivos('course-files', rutas)
     if (error) {
       setBusy(false)
       return setError('No se pudo eliminar: ' + error.message)

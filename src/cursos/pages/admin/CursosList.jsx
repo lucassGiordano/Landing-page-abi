@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../../lib/supabase.js'
 import { formatARS } from '../../lib/format.js'
+import { archivosDeCurso, borrarArchivos } from '../../lib/storageCleanup.js'   
 
 export default function CursosList() {
   const [cursos, setCursos] = useState(null)
@@ -10,7 +11,7 @@ export default function CursosList() {
   async function cargar() {
     const { data, error } = await supabase
       .from('courses')
-      .select('id, title, slug, price_ars_cents, status')
+      .select('id, title, slug, price_ars_cents, status, cover_path')
       .order('created_at', { ascending: false })
     if (error) setError(error.message)
     else setCursos(data)
@@ -23,6 +24,7 @@ export default function CursosList() {
   async function cambiarEstado(curso) {
     setError('')
     const nuevo = curso.status === 'published' ? 'draft' : 'published'
+    const rutas = await archivosDeCurso(curso.id)
     const { error } = await supabase.from('courses').update({ status: nuevo }).eq('id', curso.id)
     if (error) setError('No se pudo cambiar el estado: ' + error.message)
     else cargar()
@@ -40,6 +42,8 @@ export default function CursosList() {
       )
       return
     }
+    await borrarArchivos('course-files', rutas)
+    if (curso.cover_path) await borrarArchivos('covers', [curso.cover_path])
     cargar()
   }
 
