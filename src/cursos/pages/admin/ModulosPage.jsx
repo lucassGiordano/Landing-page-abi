@@ -141,6 +141,7 @@ export default function ModulosPage() {
                   >
                     ▼
                   </button>{' '}
+                    <Link to={`/admin/cursos/${id}/modulos/${m.id}`}>Contenidos</Link>{' '}
                   <button type="button" onClick={() => empezarEdicion(m)} disabled={busy}>
                     Renombrar
                   </button>{' '}
