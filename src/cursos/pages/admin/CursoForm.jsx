@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { supabase } from '../../lib/supabase.js'
 import { useAuth } from '../../context/AuthContext.jsx'
 import { slugify } from '../../lib/format.js'
+import CoverUploader from '../../components/CoverUploader.jsx'
 
 const SLUG_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/
 
@@ -18,6 +19,7 @@ export default function CursoForm() {
   const [description, setDescription] = useState('')
   const [precio, setPrecio] = useState(0)
   const [status, setStatus] = useState('draft')
+  const [coverPath, setCoverPath] = useState(null)
   const [cargando, setCargando] = useState(!esNuevo)
   const [error, setError] = useState('')
   const [aviso, setAviso] = useState('')
@@ -40,6 +42,7 @@ export default function CursoForm() {
           setDescription(data.description ?? '')
           setPrecio(data.price_ars_cents / 100)
           setStatus(data.status)
+          setCoverPath(data.cover_path)
         }
         setCargando(false)
       })
@@ -145,7 +148,11 @@ export default function CursoForm() {
           onChange={(e) => setPrecio(e.target.value)}
         />
       </label>
-
+      {esNuevo ? (
+        <p style={{ margin: 0 }}>Vas a poder subir la portada después de guardar el curso.</p>
+        ) : (
+         <CoverUploader courseId={id} path={coverPath} onChange={setCoverPath} />
+        )}
       {error && <p style={{ color: 'crimson', margin: 0 }}>{error}</p>}
       {aviso && <p style={{ color: 'green', margin: 0 }}>{aviso}</p>}
       <button type="submit" disabled={busy}>
