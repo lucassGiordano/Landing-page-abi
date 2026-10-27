@@ -15,10 +15,9 @@ import ModulosPage from './pages/admin/ModulosPage.jsx'
 import ContenidosPage from './pages/admin/ContenidosPage.jsx'
 import ComprasPage from './pages/admin/ComprasPage.jsx'
 import UsuariosPage from './pages/admin/UsuariosPage.jsx'
+import Catalogo from './pages/Catalogo.jsx'
+import CursoDetalle from './pages/CursoDetalle.jsx'
 
-function Catalogo() {
-  return <p>Catálogo (próximamente)</p>
-}
 
 export default function App() {
   return (
@@ -26,6 +25,7 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Catalogo />} />
+          <Route path="/curso/:slug" element={<CursoDetalle />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registro />} />
           <Route path="/recuperar" element={<Recuperar />} />
