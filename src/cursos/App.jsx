@@ -13,6 +13,8 @@ import CursosList from './pages/admin/CursosList.jsx'
 import CursoForm from './pages/admin/CursoForm.jsx'
 import ModulosPage from './pages/admin/ModulosPage.jsx'
 import ContenidosPage from './pages/admin/ContenidosPage.jsx'
+import ComprasPage from './pages/admin/ComprasPage.jsx'
+import UsuariosPage from './pages/admin/UsuariosPage.jsx'
 
 function Catalogo() {
   return <p>Catálogo (próximamente)</p>
@@ -39,6 +41,8 @@ export default function App() {
           <Route path="cursos/:id" element={<CursoForm key="editar" />} />
           <Route path="cursos/:id/modulos" element={<ModulosPage />} />
           <Route path="cursos/:id/modulos/:moduleId" element={<ContenidosPage />} />
+          <Route path="compras" element={<ComprasPage />} />
+          <Route path="usuarios" element={<UsuariosPage />} />
           </Route>
           </Route>
           <Route path="*" element={<p>Página no encontrada</p>} />

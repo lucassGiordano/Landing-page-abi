@@ -10,6 +10,12 @@ export default function AdminLayout() {
         <NavLink to="/admin/cursos" style={estilo}>
           Cursos
         </NavLink>
+        <NavLink to="/admin/compras" style={estilo}>
+          Compras
+        </NavLink>
+        <NavLink to="/admin/usuarios" style={estilo}>
+          Usuarios
+        </NavLink>
       </nav>
       <Outlet />
     </div>
