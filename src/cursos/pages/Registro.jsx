@@ -57,7 +57,7 @@ export default function Registro() {
   }
 
   return (
-    <form onSubmit={onSubmit} style={{ display: 'grid', gap: 12, maxWidth: 320 }}>
+    <form onSubmit={onSubmit} className="auth-card" style={{ display: 'grid', gap: 12, maxWidth: 320 }}>
       <h2>Crear cuenta</h2>
       <input
         type="text"

@@ -29,36 +29,34 @@ export default function CursoDetalle() {
   if (curso === undefined) return <p>Cargando...</p>
   if (curso === null) {
     return (
-      <div>
+      <div className="course-detail">
         <h2>Curso no encontrado</h2>
-        <p>
-          <Link to="/">← Volver al catálogo</Link>
-        </p>
+        <Link to="/" className="back">
+          ← Volver al catálogo
+        </Link>
       </div>
     )
   }
 
   return (
-    <div style={{ display: 'grid', gap: 16 }}>
-      <p style={{ margin: 0 }}>
-        <Link to="/">← Volver al catálogo</Link>
-      </p>
-      {curso.cover_path && (
-        <img
-          src={coverUrl(curso.cover_path)}
-          alt=""
-          style={{ width: '100%', aspectRatio: '16 / 9', objectFit: 'cover', borderRadius: 6 }}
-        />
-      )}
-      <h2 style={{ margin: 0 }}>{curso.title}</h2>
-      {curso.description && <p style={{ margin: 0, whiteSpace: 'pre-line' }}>{curso.description}</p>}
+    <div className="course-detail">
+      <Link to="/" className="back">
+        ← Volver al catálogo
+      </Link>
+
+      {curso.cover_path && <img className="hero-cover" src={coverUrl(curso.cover_path)} alt="" />}
+
+      <div>
+        <h2>{curso.title}</h2>
+        {curso.description && <p className="desc">{curso.description}</p>}
+      </div>
 
       <div>
         <h3>Temario</h3>
         {curso.modules.length === 0 ? (
           <p>El temario se publicará pronto.</p>
         ) : (
-          <ol>
+          <ol className="syllabus">
             {curso.modules.map((m) => (
               <li key={m.id}>{m.title}</li>
             ))}
@@ -66,12 +64,14 @@ export default function CursoDetalle() {
         )}
       </div>
 
-      <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-        <strong style={{ fontSize: 20 }}>{formatARS(curso.price_ars_cents)}</strong>
+      <div className="buy-box">
+        <span className="price">{formatARS(curso.price_ars_cents)}</span>
         {user ? (
-          <button disabled>Comprar (disponible pronto)</button>
+          <button type="button" className="btn" disabled>
+            Comprar (disponible pronto)
+          </button>
         ) : (
-          <Link to="/login" state={{ from: location.pathname }}>
+          <Link to="/login" state={{ from: location.pathname }} className="btn">
             Ingresá para comprar
           </Link>
         )}

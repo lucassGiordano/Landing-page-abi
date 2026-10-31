@@ -1,0 +1,283 @@
+/* =====================================================================
+   Estilos de /cursos — mismos colores y tipografías que la landing
+   (Cuerpo Raíz · Abigail Vajda). Se carga solo en la sección de cursos.
+   ===================================================================== */
+:root{
+  --ink:#232920;
+  --ink-soft:#4a5240;
+  --root-dark:#2c3524;
+  --root-mid:#6c7a56;
+  --clay:#b3603f;
+  --clay-soft:#c98a68;
+  --parchment:#f2ece0;
+  --parchment-2:#e8e0cf;
+  --cream:#f8f4ea;
+  --line:rgba(35,41,32,0.14);
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+html{ scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *{ animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+}
+
+body{
+  font-family:'Work Sans', sans-serif;
+  color:var(--ink);
+  background:var(--parchment);
+  line-height:1.6;
+  overflow-x:hidden;
+}
+a{ color:inherit; text-decoration:none; }
+:focus-visible{ outline:2px solid var(--clay); outline-offset:3px; }
+
+h1,h2,h3,h4{
+  font-family:'Fraunces', serif;
+  font-weight:450;
+  color:var(--root-dark);
+  line-height:1.15;
+}
+h2{ font-size:clamp(1.9rem, 3.6vw, 2.7rem); margin-bottom:0.8rem; }
+h3{ font-size:1.45rem; margin-bottom:0.8rem; }
+h4{ font-size:1.15rem; margin-bottom:0.6rem; }
+p{ color:var(--ink-soft); }
+ol, ul{ padding-left:1.4rem; }
+small{ color:var(--ink-soft); }
+
+.eyebrow{
+  font-size:0.72rem;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  font-weight:600;
+}
+
+/* ---------- estructura ---------- */
+.cursos-app{ min-height:100vh; display:flex; flex-direction:column; }
+.cursos-main{
+  flex:1;
+  width:100%;
+  max-width:1080px;
+  margin:0 auto;
+  padding:3rem 1.5rem 4rem;
+}
+.cursos-main a{ color:var(--clay); }
+.cursos-main a:hover{ text-decoration:underline; text-underline-offset:3px; }
+
+/* ---------- menú superior (igual que la landing) ---------- */
+.site-nav{
+  position:sticky; top:0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap;
+  gap:0.8rem 1.5rem;
+  padding:1rem 2.5rem;
+  background:var(--root-dark);
+  color:var(--cream);
+}
+.site-nav .brand{ display:flex; align-items:center; gap:0.65rem; flex-shrink:0; color:var(--cream); }
+.site-nav .brand svg{ width:26px; height:26px; flex-shrink:0; }
+.site-nav .brand span{
+  font-family:'Fraunces', serif;
+  font-style:italic;
+  font-weight:400;
+  font-size:0.95rem;
+  opacity:0.9;
+  white-space:nowrap;
+}
+.site-nav .nav-links{ display:flex; align-items:center; gap:1.6rem; list-style:none; padding:0; flex-wrap:wrap; }
+.site-nav a, .site-nav .nav-links a{
+  font-size:0.72rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:var(--cream);
+  opacity:0.82;
+  transition:opacity 0.2s ease, color 0.2s ease;
+}
+.site-nav .brand{ opacity:1; }
+.site-nav .nav-links a:hover, .site-nav .nav-links a.active{ opacity:1; color:var(--clay-soft); text-decoration:none; }
+.site-nav .nav-session{ display:flex; align-items:center; gap:1.2rem; flex-wrap:wrap; }
+.site-nav .nav-session a:hover{ opacity:1; color:var(--clay-soft); text-decoration:none; }
+.site-nav .nav-user{ font-size:0.8rem; opacity:0.85; }
+.site-nav .cta-link{ border-bottom:1px solid var(--clay-soft); padding-bottom:2px; white-space:nowrap; }
+.site-nav button{
+  background:transparent;
+  color:var(--cream);
+  border:1px solid rgba(248,244,234,0.5);
+  font-size:0.72rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  font-weight:600;
+  padding:0.45rem 1rem;
+}
+.site-nav button:hover:not(:disabled){ background:var(--cream); color:var(--root-dark); border-color:var(--cream); }
+
+footer{
+  background:#1c2216;
+  color:rgba(248,244,234,0.6);
+  text-align:center;
+  padding:2rem;
+  font-size:0.75rem;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+}
+
+/* ---------- botones ---------- */
+/* Botón común (acciones secundarias, sobre todo en el panel de admin) */
+button{
+  font-family:inherit;
+  font-size:0.8rem;
+  cursor:pointer;
+  padding:0.45rem 0.95rem;
+  background:var(--cream);
+  color:var(--ink);
+  border:1px solid var(--line);
+  transition:background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+button:hover:not(:disabled){ border-color:var(--clay); color:var(--clay); }
+button:disabled{ opacity:0.5; cursor:not-allowed; }
+
+/* Botón principal: .btn y los botones "Guardar", "Ingresar", etc. de los formularios */
+.btn,
+button[type="submit"]{
+  display:inline-block;
+  background:var(--root-dark);
+  color:var(--cream);
+  padding:0.95rem 2.1rem;
+  font-size:0.76rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  font-weight:600;
+  width:fit-content;
+  border:1px solid transparent;
+  text-align:center;
+}
+.btn:hover:not(:disabled),
+button[type="submit"]:hover:not(:disabled){
+  background:var(--clay);
+  color:var(--cream);
+  border-color:transparent;
+  transform:translateY(-1px);
+  text-decoration:none;
+}
+.cursos-main a.btn{ color:var(--cream); }
+.cursos-main a.btn:hover{ text-decoration:none; }
+
+/* ---------- formularios ---------- */
+label{ font-size:0.85rem; color:var(--ink-soft); }
+input, textarea, select{
+  font:inherit;
+  color:var(--ink);
+  background:var(--cream);
+  border:1px solid var(--line);
+  padding:0.7rem 0.9rem;
+  border-radius:0;
+}
+input::placeholder, textarea::placeholder{ color:rgba(35,41,32,0.45); }
+input:focus, textarea:focus, select:focus{ outline:2px solid var(--clay); outline-offset:1px; border-color:transparent; }
+input[type="file"]{ background:transparent; border:1px dashed var(--line); padding:0.55rem; font-size:0.85rem; }
+
+/* Tarjeta de las pantallas de ingreso, registro y recuperación */
+.auth-card{
+  background:var(--cream);
+  border-top:4px solid var(--root-mid);
+  padding:2.2rem 2rem;
+  max-width:420px !important;
+  margin:1rem auto;
+}
+.auth-card h2{ font-size:1.8rem; margin-bottom:0.2rem; }
+
+/* ---------- tablas del panel ---------- */
+table{ width:100%; border-collapse:collapse; background:var(--cream); font-size:0.92rem; }
+th{
+  font-size:0.7rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  font-weight:600;
+  color:var(--ink-soft);
+  text-align:left;
+  padding:0.85rem 1rem;
+  border-bottom:1px solid var(--line);
+}
+td{ padding:0.8rem 1rem; vertical-align:middle; }
+tbody tr{ border-top:1px solid var(--line); }
+
+/* ---------- catálogo ---------- */
+.page-head{ text-align:center; max-width:680px; margin:0 auto 3rem; }
+.page-head .eyebrow{ display:block; color:var(--clay); margin-bottom:0.8rem; }
+
+.course-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+  gap:1.6rem;
+}
+.cursos-main a.course-card{
+  color:inherit;
+  background:var(--cream);
+  border-top:4px solid var(--root-mid);
+  display:flex;
+  flex-direction:column;
+  transition:transform 0.25s ease, box-shadow 0.25s ease;
+}
+.cursos-main a.course-card:hover{
+  text-decoration:none;
+  transform:translateY(-3px);
+  box-shadow:0 12px 28px rgba(35,41,32,0.12);
+}
+.course-card .cover, .course-card .cover-placeholder{
+  display:block;
+  width:100%;
+  aspect-ratio:16 / 9;
+  object-fit:cover;
+}
+.course-card .cover-placeholder{ background:var(--parchment-2); }
+.course-card .body{ padding:1.4rem 1.5rem 1.6rem; display:flex; flex-direction:column; gap:0.6rem; flex:1; }
+.course-card h3{ font-size:1.35rem; margin:0; }
+.course-card .desc{
+  font-size:0.95rem;
+  color:var(--ink-soft);
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.course-card .price{ margin-top:auto; font-family:'Fraunces', serif; font-size:1.25rem; color:var(--clay); }
+
+/* ---------- detalle del curso ---------- */
+.course-detail{ max-width:820px; margin:0 auto; display:grid; gap:2.2rem; }
+.course-detail .back{ font-size:0.76rem; letter-spacing:0.14em; text-transform:uppercase; font-weight:600; }
+.course-detail .hero-cover{ width:100%; aspect-ratio:16 / 9; object-fit:cover; display:block; }
+.course-detail .desc{ font-size:1.05rem; color:var(--ink-soft); white-space:pre-line; }
+.syllabus{ list-style:none; padding:0; display:grid; gap:0.8rem; counter-reset:mod; }
+.syllabus li{
+  counter-increment:mod;
+  background:var(--cream);
+  padding:1rem 1.3rem;
+  border-left:3px solid var(--clay-soft);
+  display:flex;
+  gap:0.9rem;
+  align-items:baseline;
+}
+.syllabus li::before{ content:counter(mod); font-family:'Fraunces', serif; font-style:italic; color:var(--clay); }
+
+.buy-box{
+  background:var(--root-dark);
+  color:var(--cream);
+  padding:2rem 2.5rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1.5rem;
+  flex-wrap:wrap;
+}
+.buy-box .price{ font-family:'Fraunces', serif; font-size:2rem; color:var(--clay-soft); }
+.buy-box .btn{ background:var(--clay); }
+.buy-box .btn:hover:not(:disabled){ background:var(--cream); color:var(--root-dark); }
+
+/* ---------- celular ---------- */
+@media (max-width: 860px){
+  .site-nav{ padding:0.9rem 1.2rem; }
+  .cursos-main{ padding:2rem 1.1rem 3rem; }
+  .buy-box{ padding:1.6rem; }
+  table{ display:block; overflow-x:auto; }
+}
