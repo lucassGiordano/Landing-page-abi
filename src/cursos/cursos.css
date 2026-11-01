@@ -67,13 +67,18 @@ small{ color:var(--ink-soft); }
 /* ---------- menú superior (igual que la landing) ---------- */
 .site-nav{
   position:sticky; top:0; z-index:50;
-  display:flex; align-items:center; justify-content:space-between;
-  flex-wrap:wrap;
+  /* 3 columnas: los links del medio quedan centrados sin importar el ancho del usuario */
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
   gap:0.8rem 1.5rem;
   padding:1rem 2.5rem;
   background:var(--root-dark);
   color:var(--cream);
 }
+.site-nav .brand{ justify-self:start; }
+.site-nav .nav-links{ justify-self:center; }
+.site-nav .nav-session{ justify-self:end; }
 .site-nav .brand{ display:flex; align-items:center; gap:0.65rem; flex-shrink:0; color:var(--cream); }
 .site-nav .brand svg{ width:26px; height:26px; flex-shrink:0; }
 .site-nav .brand span{
@@ -98,7 +103,14 @@ small{ color:var(--ink-soft); }
 .site-nav .nav-links a:hover, .site-nav .nav-links a.active{ opacity:1; color:var(--clay-soft); text-decoration:none; }
 .site-nav .nav-session{ display:flex; align-items:center; gap:1.2rem; flex-wrap:wrap; }
 .site-nav .nav-session a:hover{ opacity:1; color:var(--clay-soft); text-decoration:none; }
-.site-nav .nav-user{ font-size:0.8rem; opacity:0.85; }
+.site-nav .nav-user{
+  font-size:0.8rem;
+  opacity:0.85;
+  max-width:200px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
 .site-nav .cta-link{ border-bottom:1px solid var(--clay-soft); padding-bottom:2px; white-space:nowrap; }
 .site-nav button{
   background:transparent;
@@ -275,6 +287,11 @@ tbody tr{ border-top:1px solid var(--line); }
 .buy-box .btn:hover:not(:disabled){ background:var(--cream); color:var(--root-dark); }
 
 /* ---------- celular ---------- */
+@media (max-width: 1000px){
+  .site-nav{ display:flex; flex-wrap:wrap; justify-content:space-between; }
+  .site-nav .nav-links{ order:3; width:100%; justify-content:center; }
+}
+
 @media (max-width: 860px){
   .site-nav{ padding:0.9rem 1.2rem; }
   .cursos-main{ padding:2rem 1.1rem 3rem; }

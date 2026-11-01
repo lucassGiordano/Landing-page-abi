@@ -103,6 +103,26 @@
   }
   .site-nav .cta-link:hover{ color:var(--clay-soft); }
 
+    .site-nav .nav-actions{ display:flex; align-items:center; gap:1.2rem; flex-shrink:0; }
+  .site-nav .nav-cursos-mobile{
+    display:none;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    font-weight:600;
+    opacity:0.82;
+    white-space:nowrap;
+  }
+    .site-nav .cta-link.is-user{
+    display:inline-block;
+    text-transform:none;
+    letter-spacing:0.04em;
+    max-width:200px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
   /* ---------- intro / inicio ---------- */
   .intro{
     position:relative;
@@ -505,6 +525,8 @@
   @media (max-width: 860px){
     .site-nav{ padding:0.9rem 1.4rem; }
     .site-nav .nav-links{ display:none; }
+    .site-nav .nav-cursos-mobile{ display:inline; }
+    .site-nav .nav-actions{ gap:0.9rem; }
     .caminos-grid, .steps-grid, .checklist, .includes-grid, .about-grid{ grid-template-columns:1fr; }
     .testimonial-carousel-wrapper { padding: 0 1rem; }
     .testimonial-card{ flex-direction: column; text-align: center; padding: 2rem 1.2rem; }
@@ -513,6 +535,7 @@
     .mobile-controls { display: flex; justify-content: center; margin-top: 1rem; }
     .pantera-box{ flex-direction:column; text-align:center; }
     .section-padding{ padding:3.5rem 1.4rem; }
+        .site-nav .cta-link.is-user{ max-width:110px; }
   }
 </style>
 </head>
@@ -535,11 +558,40 @@
       <li><a href="#page-metodo" class="nav-page-link">El Método</a></li>
       <li><a href="#page-grupal" class="nav-page-link">Volver a Vos (Grupal)</a></li>
       <li><a href="#page-individual" class="nav-page-link">Individual</a></li>
+      <li><a href="/cursos/" class="nav-page-link">Cursos</a></li>
       <li><a href="#page-sobre-mi" class="nav-page-link">Sobre Mí</a></li>
       <li><a href="#page-contacto" class="nav-page-link">Contacto</a></li>
     </ul>
-    <a href="#" class="cta-link" data-cta="whatsapp">Consultar por WhatsApp →</a>
+    <div class="nav-actions">
+      <a href="/cursos/login" class="cta-link" data-auth-link>Iniciar sesión</a>
+    </div>
   </nav>
+
+    <script>
+    /* Si hay una sesión guardada de /cursos, el botón muestra el nombre del usuario */
+    (function () {
+      try {
+        var key = Object.keys(localStorage).find(function (k) {
+          return /^sb-.+-auth-token$/.test(k);
+        });
+        if (!key) return;
+        var sesion = JSON.parse(localStorage.getItem(key));
+        if (!sesion || !sesion.refresh_token || !sesion.user) return;
+
+        var meta = sesion.user.user_metadata || {};
+        var nombre = String(meta.display_name || sesion.user.email || 'Mi cuenta').trim();
+
+        document.querySelectorAll('[data-auth-link]').forEach(function (el) {
+          el.textContent = nombre;
+          el.title = 'Ir a mis cursos';
+          el.href = '/cursos/mis-cursos';
+          el.classList.add('is-user');
+        });
+      } catch (e) {
+        /* si no se puede leer, queda "Iniciar sesión" */
+      }
+    })();
+  </script>
 
   <!-- ================= INICIO ================= -->
   <div class="page active" id="page-inicio">

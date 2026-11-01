@@ -23,6 +23,9 @@ export default function Layout() {
 
         <ul className="nav-links">
           <li>
+            <a href="/">Inicio</a>
+          </li>
+          <li>
             <NavLink to="/" end>
               Catálogo
             </NavLink>
