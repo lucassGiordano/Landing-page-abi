@@ -285,6 +285,12 @@ tbody tr{ border-top:1px solid var(--line); }
 .buy-box .price{ font-family:'Fraunces', serif; font-size:2rem; color:var(--clay-soft); }
 .buy-box .btn{ background:var(--clay); }
 .buy-box .btn:hover:not(:disabled){ background:var(--cream); color:var(--root-dark); }
+.buy-box .buy-error{
+  flex-basis:100%;
+  margin:0;
+  color:#ffd7d0;
+  font-size:0.95rem;
+}
 
 /* ---------- celular ---------- */
 @media (max-width: 1000px){

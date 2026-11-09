@@ -10,6 +10,8 @@ export default function CursoDetalle() {
   const location = useLocation()
   const [curso, setCurso] = useState(undefined) // undefined = cargando, null = no existe
   const [error, setError] = useState('')
+  const [comprando, setComprando] = useState(false)
+  const [errorCompra, setErrorCompra] = useState('')
 
   useEffect(() => {
     supabase
@@ -36,6 +38,33 @@ export default function CursoDetalle() {
         </Link>
       </div>
     )
+  }
+
+  async function comprar() {
+    setErrorCompra('')
+    setComprando(true)
+    try {
+      const { data, error } = await supabase.functions.invoke('create-checkout', {
+        body: { courseId: curso.id },
+      })
+
+      if (error) {
+        let mensaje = 'No se pudo iniciar el pago'
+        try {
+          const detalle = await error.context?.json?.()
+          if (detalle?.error) mensaje = detalle.error
+        } catch {
+          // sin cuerpo legible: queda el mensaje genérico
+        }
+        throw new Error(mensaje)
+      }
+
+      if (!data?.checkoutUrl) throw new Error('Mercado Pago no devolvió el link de pago')
+      window.location.href = data.checkoutUrl
+    } catch (err) {
+      setErrorCompra(err.message ?? 'No se pudo iniciar el pago')
+      setComprando(false)
+    }
   }
 
   return (
@@ -67,14 +96,15 @@ export default function CursoDetalle() {
       <div className="buy-box">
         <span className="price">{formatARS(curso.price_ars_cents)}</span>
         {user ? (
-          <button type="button" className="btn" disabled>
-            Comprar (disponible pronto)
+          <button type="button" className="btn" onClick={comprar} disabled={comprando}>
+            {comprando ? 'Redirigiendo a Mercado Pago...' : 'Comprar'}
           </button>
         ) : (
           <Link to="/login" state={{ from: location.pathname }} className="btn">
             Ingresá para comprar
           </Link>
         )}
+        {errorCompra && <p className="buy-error">{errorCompra}</p>}
       </div>
     </div>
   )
