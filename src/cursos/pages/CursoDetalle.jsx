@@ -12,6 +12,8 @@ export default function CursoDetalle() {
   const [error, setError] = useState('')
   const [comprando, setComprando] = useState(false)
   const [errorCompra, setErrorCompra] = useState('')
+  // null = todavía no sabemos, false = no lo compró, true = ya tiene acceso
+  const [acceso, setAcceso] = useState(null)
 
   useEffect(() => {
     supabase
@@ -26,6 +28,27 @@ export default function CursoDetalle() {
         setCurso(data ?? null)
       })
   }, [slug])
+
+  // ¿Ya compró este curso? Solo decide qué botón mostrar (entrar o comprar).
+  useEffect(() => {
+    if (!user || !curso?.id) {
+      setAcceso(null)
+      return
+    }
+    let cancelado = false
+    supabase
+      .from('enrollments')
+      .select('course_id')
+      .eq('user_id', user.id)
+      .eq('course_id', curso.id)
+      .maybeSingle()
+      .then(({ data, error }) => {
+        if (!cancelado && !error) setAcceso(Boolean(data))
+      })
+    return () => {
+      cancelado = true
+    }
+  }, [user, curso?.id])
 
   if (error) return <p style={{ color: 'crimson' }}>{error}</p>
   if (curso === undefined) return <p>Cargando...</p>
@@ -95,8 +118,12 @@ export default function CursoDetalle() {
 
       <div className="buy-box">
         <span className="price">{formatARS(curso.price_ars_cents)}</span>
-        {user ? (
-          <button type="button" className="btn" onClick={comprar} disabled={comprando}>
+        {acceso ? (
+          <Link to={`/curso/${slug}/aprender`} className="btn">
+            Continuar el curso
+          </Link>
+        ) : user ? (
+          <button type="button" className="btn" onClick={comprar} disabled={comprando || acceso === null}>
             {comprando ? 'Redirigiendo a Mercado Pago...' : 'Comprar'}
           </button>
         ) : (

@@ -318,6 +318,140 @@ tbody tr{ border-top:1px solid var(--line); }
 .gracias-acciones .btn{ background:var(--clay); }
 .gracias-acciones .btn:hover:not(:disabled){ background:var(--cream); color:var(--root-dark); }
 
+/* ---------- aula del alumno (contenido protegido) ---------- */
+.aula{
+  display:grid;
+  grid-template-columns:300px minmax(0,1fr);
+  gap:2.5rem;
+  align-items:start;
+}
+.aula-indice{
+  background:var(--cream);
+  padding:1.6rem 1.5rem;
+  border-top:4px solid var(--root-mid);
+  position:sticky;
+  top:1.5rem;
+}
+.aula-indice .back{ font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; font-weight:600; }
+.aula-indice h2{ font-size:1.25rem; margin:0.9rem 0 1.4rem; }
+.aula-modulo + .aula-modulo{ margin-top:1.6rem; }
+.aula-modulo h3{
+  font-size:0.95rem;
+  margin:0 0 0.6rem;
+  display:flex;
+  gap:0.5rem;
+  align-items:baseline;
+}
+.aula-numero{ font-family:'Fraunces', serif; font-style:italic; color:var(--clay); }
+.aula-modulo ul{ list-style:none; margin:0; padding:0; display:grid; gap:0.35rem; }
+.aula-leccion{
+  width:100%;
+  text-align:left;
+  background:none;
+  border:0;
+  border-left:2px solid transparent;
+  padding:0.45rem 0.6rem;
+  font:inherit;
+  font-size:0.9rem;
+  color:var(--ink-soft);
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:0.2rem;
+}
+.aula-leccion:hover{ color:var(--root-dark); border-left-color:var(--clay-soft); }
+.aula-leccion.activa{
+  background:var(--parchment-2);
+  border-left-color:var(--clay);
+  color:var(--root-dark);
+  font-weight:600;
+}
+.aula-tipo{
+  display:inline-block;
+  font-size:0.62rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--clay);
+  margin-right:0.5rem;
+}
+.aula-vacio{ font-size:0.85rem; color:var(--ink-soft); font-style:italic; margin:0; }
+.aula-leccion-titulo{ flex:1; }
+.aula-check{ color:var(--root-mid); font-weight:700; }
+.aula-progreso{ margin:0 0 1.5rem; }
+.aula-acciones{ margin-top:1.1rem; display:grid; gap:0.6rem; justify-items:start; }
+.aula-completar{
+  background:none;
+  border:1px solid var(--clay-soft);
+  color:var(--clay);
+  padding:0.5rem 1rem;
+  font-size:0.78rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  font-weight:600;
+  cursor:pointer;
+  transition:background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.aula-completar:hover:not(:disabled){ background:var(--clay-soft); color:var(--root-dark); }
+.aula-completar.hecha{ background:var(--root-mid); border-color:var(--root-mid); color:var(--cream); }
+.aula-completar:disabled{ opacity:0.6; cursor:default; }
+.aula-error{ margin:0; color:crimson; font-size:0.85rem; }
+.aula-panel{ min-width:0; }
+.aula-cabecera{ margin-bottom:1.6rem; }
+.aula-cabecera h2{ margin:0.35rem 0 0; }
+.aula-texto{ max-width:70ch; }
+.aula-texto h1, .aula-texto h2, .aula-texto h3{ margin:1.6rem 0 0.6rem; }
+.aula-texto p, .aula-texto li{ line-height:1.75; }
+.aula-texto ul, .aula-texto ol{ padding-left:1.3rem; display:grid; gap:0.35rem; }
+.aula-texto blockquote{
+  margin:1rem 0;
+  padding-left:1rem;
+  border-left:3px solid var(--clay-soft);
+  color:var(--ink-soft);
+}
+.aula-imagen{ max-width:100%; height:auto; display:block; }
+.aula-pdf{ width:100%; height:75vh; border:0; background:var(--parchment-2); }
+.aula-nota{ font-size:0.85rem; color:var(--ink-soft); margin-top:0.9rem; }
+.aula-aviso{ display:block; max-width:620px; margin:0 auto; text-align:center; }
+.aula-aviso .estado-icono{ display:block; font-size:2.4rem; margin-bottom:1rem; }
+.aula-aviso .gracias-acciones{ margin-top:1.8rem; }
+@media (max-width: 900px){
+  .aula{ grid-template-columns:1fr; gap:1.6rem; }
+  .aula-indice{ position:static; }
+}
+
+/* ---------- mis cursos (cursos comprados) ---------- */
+.mis-cursos-vacio{
+  display:grid;
+  gap:1.2rem;
+  justify-items:center;
+  text-align:center;
+  padding:2rem 0;
+}
+.mis-cursos-vacio p{ margin:0; color:var(--ink-soft); }
+.course-card .progreso{
+  margin-top:auto;
+  padding-top:0.9rem;
+  display:grid;
+  gap:0.45rem;
+}
+.progreso-barra{
+  height:6px;
+  background:var(--parchment-2);
+  overflow:hidden;
+}
+.progreso-barra span{
+  display:block;
+  height:100%;
+  background:var(--clay);
+  transition:width 0.3s ease;
+}
+.progreso-texto{
+  font-size:0.78rem;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--ink-soft);
+}
+
 /* ---------- celular ---------- */
 @media (max-width: 1000px){
   .site-nav{ display:flex; flex-wrap:wrap; justify-content:space-between; }

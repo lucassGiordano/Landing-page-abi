@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext.jsx'
 import Layout from './components/Layout.jsx'
@@ -19,6 +20,10 @@ import Catalogo from './pages/Catalogo.jsx'
 import CursoDetalle from './pages/CursoDetalle.jsx'
 import Gracias from './pages/Gracias.jsx'
 
+// El aula (y el renderizador de Markdown) se descarga recién cuando un alumno
+// abre una lección: no pesa en la carga del catálogo.
+const CursoAlumno = lazy(() => import('./pages/CursoAlumno.jsx'))
+
 
 export default function App() {
   return (
@@ -34,6 +39,11 @@ export default function App() {
           <Route path="/nueva-contrasena" element={<NuevaContrasena />} />
           <Route element={<RequireAuth />}>
           <Route path="/mis-cursos" element={<MisCursos />} />
+          <Route path="/curso/:slug/aprender" element={
+            <Suspense fallback={<p>Cargando el curso...</p>}>
+              <CursoAlumno />
+            </Suspense>
+          } />
           </Route>
           <Route element={<RequireAdmin />}>
           <Route path="/admin" element={<AdminLayout />}>
