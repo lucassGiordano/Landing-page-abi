@@ -17,6 +17,7 @@ import ComprasPage from './pages/admin/ComprasPage.jsx'
 import UsuariosPage from './pages/admin/UsuariosPage.jsx'
 import Catalogo from './pages/Catalogo.jsx'
 import CursoDetalle from './pages/CursoDetalle.jsx'
+import Gracias from './pages/Gracias.jsx'
 
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Catalogo />} />
           <Route path="/curso/:slug" element={<CursoDetalle />} />
+          <Route path="/gracias" element={<Gracias />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registro />} />
           <Route path="/recuperar" element={<Recuperar />} />

@@ -292,6 +292,32 @@ tbody tr{ border-top:1px solid var(--line); }
   font-size:0.95rem;
 }
 
+/* ---------- página de gracias (vuelta de Mercado Pago) ---------- */
+.gracias{
+  max-width:640px;
+  margin:0 auto;
+  text-align:center;
+}
+.gracias .estado-icono{
+  display:block;
+  font-size:2.6rem;
+  line-height:1;
+  margin-bottom:1rem;
+}
+.gracias .page-head{ margin-bottom:1.8rem; }
+.gracias > p{
+  margin:0 auto 2rem;
+  max-width:520px;
+}
+.gracias-acciones{
+  display:flex;
+  gap:1rem;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.gracias-acciones .btn{ background:var(--clay); }
+.gracias-acciones .btn:hover:not(:disabled){ background:var(--cream); color:var(--root-dark); }
+
 /* ---------- celular ---------- */
 @media (max-width: 1000px){
   .site-nav{ display:flex; flex-wrap:wrap; justify-content:space-between; }
