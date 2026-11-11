@@ -14,6 +14,7 @@ type DbOrder = {
   amount_cents: number
   currency: string
   status: string
+  paid_at: string | null
 }
 
 function parseSignatureHeader(header: string) {
@@ -190,7 +191,7 @@ Deno.serve(async (req: Request) => {
   // 3. Buscar nuestra orden
   const { data: localOrder, error: orderError } = await admin
     .from('orders')
-    .select('id, user_id, course_id, amount_cents, currency, status')
+    .select('id, user_id, course_id, amount_cents, currency, status, paid_at')
     .eq('id', externalReference)
     .maybeSingle<DbOrder>()
 
@@ -221,10 +222,16 @@ Deno.serve(async (req: Request) => {
   const ahora = new Date().toISOString()
 
   if (mpStatus === 'processed' && mpStatusDetail !== 'partially_refunded') {
-    // Pago acreditado: aprobar la orden y crear la inscripción (idempotente)
+    // Pago acreditado: aprobar la orden y crear la inscripción (idempotente).
+    // `paid_at` se escribe solo la primera vez: si Mercado Pago reenvía el aviso
+    // (reintenta hasta 96 h), la fecha original del pago no se pisa.
     const { error: updateError } = await admin
       .from('orders')
-      .update({ status: 'approved', mp_order_id: String(dataId), paid_at: ahora })
+      .update({
+        status: 'approved',
+        mp_order_id: String(dataId),
+        paid_at: localOrder.paid_at ?? ahora,
+      })
       .eq('id', localOrder.id)
 
     if (updateError) {
