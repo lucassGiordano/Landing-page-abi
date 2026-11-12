@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Manual de administración · Cuerpo Raíz</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm 18mm 16mm; }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 10.2pt;
+    line-height: 1.55;
+    color: #232920;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    color: #2c3524;
+    margin: 0;
+  }
+
+  h1 { font-size: 21pt; line-height: 1.2; }
+  h2 { font-size: 15pt; margin: 18px 0 10px; padding-bottom: 6px; border-bottom: 2px solid #6c7a56; page-break-after: avoid; }
+  h3 { font-size: 11.5pt; margin: 16px 0 6px; color: #2c3524; page-break-after: avoid; }
+  h4 { font-size: 10.5pt; margin: 12px 0 4px; page-break-after: avoid; }
+
+  /* Un título nunca queda solo al pie: arrastra su párrafo introductorio */
+  h2 + p, h3 + p, h4 + p { page-break-after: avoid; }
+
+  p { margin: 0 0 8px; }
+  ul, ol { margin: 0 0 10px; padding-left: 20px; }
+  li { margin-bottom: 4px; }
+
+  code {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 9pt;
+    background: #ece5d6;
+    padding: 1px 4px;
+    border-radius: 2px;
+  }
+
+  pre {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 8.6pt;
+    line-height: 1.45;
+    background: #2c3524;
+    color: #f2ece0;
+    padding: 10px 12px;
+    border-radius: 3px;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+    margin: 8px 0 12px;
+  }
+  pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.2pt;
+    margin: 8px 0 12px;
+    page-break-inside: avoid;
+  }
+  th {
+    text-align: left;
+    background: #e8e0cf;
+    color: #2c3524;
+    font-weight: 600;
+    padding: 6px 8px;
+    border-bottom: 1.5px solid #b9ae95;
+  }
+  td { padding: 6px 8px; border-bottom: 1px solid #ded5c2; vertical-align: top; }
+
+  .cover {
+    height: 252mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    page-break-after: always;
+  }
+  .eyebrow {
+    font-size: 9pt;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #b3603f;
+    margin-bottom: 18px;
+  }
+  .cover h1 { font-size: 34pt; line-height: 1.1; }
+  .cover .sub {
+    font-family: Georgia, serif;
+    font-size: 13pt;
+    color: #4a5240;
+    margin-top: 14px;
+    max-width: 130mm;
+    line-height: 1.4;
+  }
+  .rule { width: 60mm; height: 4px; background: #6c7a56; margin: 26px 0; }
+  .meta { font-size: 9pt; color: #6c7a56; line-height: 1.7; }
+
+  .sec { page-break-before: auto; }
+  .sec.pb { page-break-before: always; }
+
+  .cuadro {
+    background: #f8f4ea;
+    border-left: 4px solid #b3603f;
+    padding: 10px 12px;
+    margin: 10px 0 14px;
+    font-size: 9.6pt;
+    page-break-inside: avoid;
+  }
+  .cuadro.verde { border-left-color: #6c7a56; }
+  .cuadro strong { color: #2c3524; }
+  .cuadro p:last-child { margin-bottom: 0; }
+
+  .toc { font-size: 10.4pt; }
+  .toc ol { padding-left: 22px; }
+  .toc li { margin-bottom: 7px; }
+  .toc .n { color: #b3603f; font-weight: 600; }
+
+  .dos-col { column-count: 2; column-gap: 10mm; }
+
+  .pie {
+    margin-top: 18px;
+    padding-top: 8px;
+    border-top: 1px solid #ded5c2;
+    font-size: 8pt;
+    color: #6c7a56;
+  }
+
+  .chip {
+    display: inline-block;
+    font-size: 8pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: #6c7a56;
+    color: #f8f4ea;
+    padding: 2px 7px;
+    border-radius: 2px;
+    margin-right: 6px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== PORTADA ==================== -->
+<div class="cover">
+  <div class="eyebrow">Cuerpo Raíz · Abigail Vajda</div>
+  <h1>Manual de<br>administración</h1>
+  <div class="sub">Publicar cursos, gestionar alumnas y entender qué pasa con cada pago.</div>
+  <div class="rule"></div>
+  <div class="meta">
+    Versión 1.0 · Noviembre 2026<br>
+    Sitio: abigailvajdacuerporaiz.com.ar<br>
+    Documento interno
+  </div>
+</div>
+
+<!-- ==================== ÍNDICE ==================== -->
+<div class="sec first">
+  <h2>Índice</h2>
+  <div class="toc">
+    <ol>
+      <li><span class="n">01</span> · El panel en 30 segundos</li>
+      <li><span class="n">02</span> · Entrar y salir</li>
+      <li><span class="n">03</span> · Cómo se organiza un curso</li>
+      <li><span class="n">04</span> · Crear un curso paso a paso</li>
+      <li><span class="n">05</span> · La portada del curso</li>
+      <li><span class="n">06</span> · Módulos</li>
+      <li><span class="n">07</span> · Contenidos: texto, archivos y videos</li>
+      <li><span class="n">08</span> · Publicar y despublicar</li>
+      <li><span class="n">09</span> · Eliminar un curso</li>
+      <li><span class="n">10</span> · Compras y estados de pago</li>
+      <li><span class="n">11</span> · Usuarios y accesos</li>
+      <li><span class="n">12</span> · Reembolsos</li>
+      <li><span class="n">13</span> · Problemas frecuentes</li>
+      <li><span class="n">14</span> · Buenas prácticas de contenido</li>
+      <li><span class="n">15</span> · Checklist antes de publicar</li>
+      <li><span class="n">16</span> · Anexo técnico</li>
+    </ol>
+  </div>
+
+  <div class="cuadro verde" style="margin-top:22px">
+    <p><strong>Cómo leer este manual.</strong> Los capítulos 1 a 14 son para el uso diario del panel. El capítulo 16 es técnico y está pensado para quien mantiene el sistema: no hace falta leerlo para publicar un curso.</p>
+  </div>
+</div>
+
+<!-- ==================== 01 ==================== -->
+<div class="sec pb">
+  <h2>01 · El panel en 30 segundos</h2>
+
+  <p>La plataforma tiene dos caras: el <strong>sitio público</strong>, donde las alumnas ven los cursos y compran, y el <strong>panel</strong>, donde vos creás el contenido y ves qué pasó con cada compra.</p>
+
+  <table>
+    <thead><tr><th>Zona</th><th>Dirección</th><th>Quién entra</th></tr></thead>
+    <tbody>
+      <tr><td>Landing</td><td><code>/</code></td><td>cualquiera</td></tr>
+      <tr><td>Catálogo de cursos</td><td><code>/cursos</code></td><td>cualquiera</td></tr>
+      <tr><td>Ficha de un curso</td><td><code>/cursos/curso/nombre-del-curso</code></td><td>cualquiera</td></tr>
+      <tr><td>Aula de una alumna</td><td><code>/cursos/curso/nombre-del-curso/aprender</code></td><td>solo quien compró</td></tr>
+      <tr><td>Mis cursos</td><td><code>/cursos/mis-cursos</code></td><td>solo alumnas con sesión</td></tr>
+      <tr><td>Panel</td><td><code>/cursos/admin</code></td><td>solo administración</td></tr>
+    </tbody>
+  </table>
+
+  <p>El panel tiene tres secciones: <strong>Cursos</strong>, <strong>Compras</strong> y <strong>Usuarios</strong>. Todo lo demás del sitio (la landing, los textos de la home) no se toca desde acá: eso vive en el código.</p>
+
+  <div class="cuadro">
+    <p><strong>Lo más importante del manual:</strong> el acceso a un curso <em>no</em> se activa a mano. Se activa solo cuando Mercado Pago confirma que el pago se acreditó. Si una alumna dice que pagó y no tiene acceso, el problema casi siempre está en el pago, no en el panel.</p>
+  </div>
+</div>
+
+<!-- ==================== 02 ==================== -->
+<div class="sec">
+  <h2>02 · Entrar y salir</h2>
+
+  <h3>Entrar</h3>
+  <ol>
+    <li>Andá a <code>https://abigailvajdacuerporaiz.com.ar/cursos/login</code>.</li>
+    <li>Ingresá con tu email y contraseña.</li>
+    <li>Una vez adentro, agregá <code>/admin</code> al final de la dirección o entrá desde el menú.</li>
+  </ol>
+
+  <p>Si tu usuario no tiene permisos de administración, el panel te va a devolver al inicio. El permiso se llama <strong>rol admin</strong> y se cambia únicamente desde la base de datos, no desde la web.</p>
+
+  <h3>Cerrar sesión</h3>
+  <p>Usá <strong>Salir</strong> en el menú. Es importante si entrás desde una computadora compartida: la sesión queda guardada en el navegador.</p>
+
+  <h3>Si olvidaste la contraseña</h3>
+  <p>En la pantalla de login hay un enlace de <strong>recuperar contraseña</strong>. Llega un correo con un botón para elegir una nueva. El enlace vence en una hora.</p>
+
+  <div class="cuadro verde">
+    <p><strong>Seguridad.</strong> El panel no tiene doble paso de verificación. Usá una contraseña larga y distinta de la del mail. Si sospechás que alguien entró, cambiá la contraseña desde el mismo flujo de recuperación.</p>
+  </div>
+</div>
+
+<!-- ==================== 03 ==================== -->
+<div class="sec">
+  <h2>03 · Cómo se organiza un curso</h2>
+
+  <p>Son tres niveles, siempre en ese orden:</p>
+
+  <table>
+    <thead><tr><th>Nivel</th><th>Qué es</th><th>Ejemplo</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Curso</strong></td><td>Lo que se vende. Tiene título, descripción, precio y portada.</td><td>«Cuerpo y ciclo menstrual»</td></tr>
+      <tr><td><strong>Módulo</strong></td><td>Un capítulo del curso. Agrupa contenidos y ordena el recorrido.</td><td>«Módulo 1 · Reconocer el ciclo»</td></tr>
+      <tr><td><strong>Contenido</strong></td><td>La pieza concreta que la alumna lee, mira o descarga.</td><td>Un texto, un PDF, un video</td></tr>
+    </tbody>
+  </table>
+
+  <p>La ficha pública del curso muestra el índice de módulos: es lo que ve alguien antes de comprar. Cuantos más claros sean los títulos de los módulos, mejor se entiende qué está comprando.</p>
+
+  <p>Dentro del aula, la alumna ve el listado de módulos y lecciones, puede marcar cada lección como completada y ve una barra de progreso. Ese progreso es personal: no se comparte con vos.</p>
+
+  <div class="cuadro">
+    <p><strong>Un curso vacío también se puede vender.</strong> El sistema no valida que tenga módulos antes de publicarlo. Antes de dar el visto bueno, recorré el aula como si fueras alumna: es la única forma de ver lo que ve ella.</p>
+  </div>
+</div>
+
+<!-- ==================== 04 ==================== -->
+<div class="sec">
+  <h2>04 · Crear un curso paso a paso</h2>
+
+  <p>En <strong>Cursos</strong> → <strong>+ Nuevo curso</strong>.</p>
+
+  <table>
+    <thead><tr><th>Campo</th><th>Qué poner</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Título</strong></td>
+        <td>El nombre que se ve en el catálogo y en la ficha. Es obligatorio.</td>
+      </tr>
+      <tr>
+        <td><strong>Slug</strong></td>
+        <td>La parte de la dirección web. Se genera solo desde el título, en minúsculas y con guiones. Ejemplo: <code>cuerpo-y-ciclo</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>Descripción</strong></td>
+        <td>Dos o tres frases para la ficha pública. Texto plano: los saltos de línea y el Markdown no se interpretan acá.</td>
+      </tr>
+      <tr>
+        <td><strong>Precio</strong></td>
+        <td>En pesos, número entero, sin puntos ni centavos. <strong>1000</strong> son mil pesos.</td>
+      </tr>
+      <tr>
+        <td><strong>Portada</strong></td>
+        <td>La imagen del catálogo. Se sube <em>después</em> de guardar el curso (ver capítulo 05).</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Reglas del slug</h3>
+  <ul>
+    <li>Solo minúsculas, números y guiones: <code>mi-primer-curso</code>.</li>
+    <li>No admite espacios, acentos, mayúsculas ni guiones bajos.</li>
+    <li>No puede repetirse: si ya existe, el sistema avisa.</li>
+    <li><strong>No lo cambies después de publicar.</strong> La dirección vieja deja de existir y los enlaces que compartiste se rompen.</li>
+  </ul>
+
+  <h3>Sobre el precio</h3>
+  <p>El precio se guarda en pesos y es el que se cobra: el servidor lo lee de la base en el momento de la compra, nunca del navegador. Si lo cambiás, las compras nuevas usan el nuevo valor y las viejas conservan lo que pagaron.</p>
+
+  <div class="cuadro">
+    <p><strong>Un curso en 0 no se puede comprar.</strong> Para regalar acceso, se otorga una inscripción manual (capítulo 11), no se pone precio cero.</p>
+  </div>
+
+  <p>Al guardar, el curso queda como <strong>Borrador</strong>: existe, pero nadie lo ve en el catálogo. Falta cargarle contenido y publicarlo.</p>
+</div>
+
+<!-- ==================== 05 ==================== -->
+<div class="sec">
+  <h2>05 · La portada del curso</h2>
+
+  <p>Se sube desde la pantalla de edición del curso, una vez que ya existe.</p>
+
+  <table>
+    <thead><tr><th>Requisito</th><th>Valor</th></tr></thead>
+    <tbody>
+      <tr><td>Formatos</td><td>PNG, JPG o WEBP</td></tr>
+      <tr><td>Tamaño máximo</td><td>5 MB</td></tr>
+      <tr><td>Proporción</td><td>16:9 horizontal (se recorta al centro)</td></tr>
+      <tr><td>Tamaño recomendado</td><td>1280 × 720 píxeles</td></tr>
+      <tr><td>Peso ideal</td><td>menos de 300 KB</td></tr>
+    </tbody>
+  </table>
+
+  <p>Si la imagen es vertical o cuadrada, el sistema la recorta para llenar el espacio 16:9: probablemente se pierdan la parte de arriba y la de abajo. Por eso conviene subirla ya horizontal y con el sujeto centrado.</p>
+
+  <ul>
+    <li>Al reemplazar la portada, la anterior se borra sola.</li>
+    <li>El botón <strong>Quitar</strong> elimina la imagen y el curso vuelve a mostrarse sin foto.</li>
+    <li>Sin portada el curso se ve igual, pero pierde fuerza en el catálogo.</li>
+  </ul>
+
+  <div class="cuadro verde">
+    <p><strong>Tip.</strong> Si la imagen pesa mucho, bajale la calidad antes de subirla. Una portada de 2 MB tarda varios segundos en cargar en el celular y eso se nota justo cuando la persona está decidiendo comprar.</p>
+  </div>
+</div>
+
+<!-- ==================== 06 ==================== -->
+<div class="sec">
+  <h2>06 · Módulos</h2>
+
+  <p>Desde la lista de cursos, en la columna de acciones, tocá <strong>Módulos</strong>. Ahí se arma el índice del curso.</p>
+
+  <h3>Qué se puede hacer</h3>
+  <table>
+    <thead><tr><th>Acción</th><th>Cómo</th><th>Cuidado</th></tr></thead>
+    <tbody>
+      <tr><td>Agregar</td><td>Escribí el título abajo y tocá <strong>Agregar módulo</strong></td><td>Se agrega al final</td></tr>
+      <tr><td>Renombrar</td><td><strong>Renombrar</strong> → escribir → Enter</td><td>Enter guarda, Escape cancela</td></tr>
+      <tr><td>Reordenar</td><td>Flechas ▲ ▼</td><td>El orden es el que ve la alumna</td></tr>
+      <tr><td>Contenidos</td><td><strong>Contenidos</strong></td><td>Ahí adentro va el material</td></tr>
+      <tr><td>Eliminar</td><td><strong>Eliminar</strong> → confirmar</td><td>Borra el módulo <em>y todo su contenido</em>, incluidos los archivos</td></tr>
+    </tbody>
+  </table>
+
+  <div class="cuadro">
+    <p><strong>Eliminar un módulo no se puede deshacer.</strong> Borra los textos, los archivos subidos y los videos asociados. Si dudás, renombralo como «(oculto)» y dejalo vacío: sigue apareciendo en el índice, así que solo usá esa salida como último recurso.</p>
+  </div>
+
+  <p>Al eliminar un módulo, los demás se renumeran solos: no quedan huecos en el orden.</p>
+</div>
+
+<!-- ==================== 07 ==================== -->
+<div class="sec">
+  <h2>07 · Contenidos: texto, archivos y videos</h2>
+
+  <p>Dentro de un módulo hay tres botones: <strong>+ Agregar texto</strong>, <strong>+ Agregar archivo</strong> y <strong>+ Agregar video</strong>.</p>
+
+  <h3>Texto</h3>
+  <p>Se escribe en <strong>Markdown</strong>, un formato liviano para dar formato sin botones. Lo básico:</p>
+
+  <pre><code>## Un subtítulo
+### Un subtítulo más chico
+
+Un párrafo normal, con **negrita** y *cursiva*.
+
+- Primer punto
+- Segundo punto
+
+1. Primer paso
+2. Segundo paso
+
+&gt; Una frase destacada</code></pre>
+
+  <p>El Markdown se muestra con el diseño del sitio (títulos en Fraunces, texto en Work Sans). No se permite HTML: si lo pegás, se ve como texto.</p>
+
+  <h3>Archivos</h3>
+  <table>
+    <thead><tr><th>Permitidos</th><th>Límite</th></tr></thead>
+    <tbody>
+      <tr><td>PDF, DOC, DOCX, PPTX, XLSX, TXT, PNG, JPG, WEBP</td><td>50 MB por archivo</td></tr>
+    </tbody>
+  </table>
+
+  <p>El archivo se sube a un almacenamiento privado. La alumna lo abre con un <strong>enlace temporal</strong>: si copia la dirección y la comparte, deja de funcionar en pocos minutos. Eso es intencional.</p>
+
+  <h3>Video</h3>
+  <p>Se pega el enlace completo de YouTube y el sistema extrae el identificador. Recomendaciones:</p>
+  <ul>
+    <li>Subilo como <strong>no listado</strong>, no como público ni privado.</li>
+    <li><strong>Privado</strong> no funciona: el reproductor no puede abrirlo.</li>
+    <li>No listado significa que solo quien tenga el enlace lo ve, y ese enlace solo aparece dentro del aula.</li>
+  </ul>
+
+  <h3>Ordenar y borrar</h3>
+  <p>Cada contenido tiene flechas ▲ ▼ para cambiar el orden. <strong>Eliminar</strong> pide confirmación y borra también el archivo del almacenamiento. Los textos se pueden <strong>Editar</strong>; los archivos y videos, no: hay que borrarlos y volver a subirlos.</p>
+</div>
+
+<!-- ==================== 08 ==================== -->
+<div class="sec">
+  <h2>08 · Publicar y despublicar</h2>
+
+  <p>El estado se cambia desde la lista de cursos, con el botón de la fila.</p>
+
+  <table>
+    <thead><tr><th>Estado</th><th>Qué significa</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Borrador</strong></td><td>No aparece en el catálogo. Nadie puede verlo ni comprarlo. Sirve para armar el curso con calma.</td></tr>
+      <tr><td><strong>Publicado</strong></td><td>Aparece en el catálogo, se puede abrir la ficha y se puede comprar.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Despublicar</h3>
+  <p>Vuelve el curso a borrador: deja de venderse y desaparece del catálogo. <strong>Quienes ya lo compraron conservan el acceso</strong> y lo siguen viendo en «Mis cursos». Es la forma correcta de retirar un curso sin perjudicar a nadie.</p>
+
+  <div class="cuadro">
+    <p><strong>Antes de publicar, revisá la ficha como si fueras a comprar.</strong> Abrí el curso en una ventana privada del navegador: así ves exactamente lo que ve alguien que no tiene sesión, sin tu acceso de administración.</p>
+  </div>
+
+  <h3>Qué no cambia al publicar</h3>
+  <ul>
+    <li>El precio no se congela: si lo cambiás, se cobra el nuevo.</li>
+    <li>Los contenidos se pueden seguir editando con el curso publicado.</li>
+    <li>Publicar no envía ningún mail a las alumnas.</li>
+  </ul>
+</div>
+
+<!-- ==================== 09 ==================== -->
+<div class="sec">
+  <h2>09 · Eliminar un curso</h2>
+
+  <p><strong>Eliminar</strong> pide confirmación y es permanente. Borra el curso, sus módulos, sus contenidos y los archivos subidos.</p>
+
+  <div class="cuadro">
+    <p><strong>Si el curso tiene compras, el sistema no lo deja borrar.</strong> Aparece el mensaje «Este curso tiene compras registradas y no se puede eliminar». Es una protección: si se borrara, se perdería el registro de esas ventas y las alumnas perderían el acceso.</p>
+    <p>En ese caso, la acción correcta es <strong>Despublicar</strong>.</p>
+  </div>
+
+  <table>
+    <thead><tr><th>Situación</th><th>Qué hacer</th></tr></thead>
+    <tbody>
+      <tr><td>Curso de prueba, sin ventas</td><td>Se puede eliminar</td></tr>
+      <tr><td>Curso real, aunque ya no se dicte</td><td>Despublicar</td></tr>
+      <tr><td>Curso con un error de precio</td><td>Corregir el precio, no borrar</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ==================== 10 ==================== -->
+<div class="sec">
+  <h2>10 · Compras y estados de pago</h2>
+
+  <p>En <strong>Compras</strong> está el historial: fecha, alumna, curso, monto, estado y el identificador de la orden en Mercado Pago. Arriba se ve el total aprobado de las últimas 200 compras.</p>
+
+  <table>
+    <thead><tr><th>Estado</th><th>Qué significa</th><th>¿Da acceso?</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Pendiente</strong></td><td>Se creó la orden y la persona fue al checkout, pero el pago no se acreditó. Puede estar en revisión, o haber abandonado.</td><td>No</td></tr>
+      <tr><td><strong>Aprobada</strong></td><td>Mercado Pago confirmó el cobro y el sistema otorgó el acceso.</td><td>Sí</td></tr>
+      <tr><td><strong>Rechazada</strong></td><td>El medio de pago no autorizó el cobro.</td><td>No</td></tr>
+      <tr><td><strong>Reembolsada</strong></td><td>Se devolvió la plata.</td><td>El acceso se conserva</td></tr>
+      <tr><td><strong>Cancelada</strong></td><td>La orden no llegó a generarse en Mercado Pago.</td><td>No</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Cómo funciona por dentro, en una frase</h3>
+  <p>Mercado Pago cobra, avisa al sistema, el sistema verifica que el aviso sea auténtico, consulta el estado real del pago y recién ahí crea la inscripción. Si algo de esa cadena falla, no hay acceso.</p>
+
+  <div class="cuadro">
+    <p><strong>Nunca otorgues acceso «porque la alumna dice que pagó».</strong> Si el pago no figura como acreditado en Mercado Pago, el cobro no existió. Y si existió pero el estado quedó en pendiente, el problema se arregla solo cuando Mercado Pago lo acredite.</p>
+  </div>
+
+  <h3>Qué hacer con una compra pendiente</h3>
+  <ol>
+    <li>Mirá el pago en el panel de Mercado Pago (Actividad).</li>
+    <li>Si ahí figura <strong>acreditado</strong> y en el panel sigue pendiente, es un problema técnico: avisá con el identificador de la orden.</li>
+    <li>Si ahí figura <strong>en revisión</strong>, hay que esperar: Mercado Pago puede tardar minutos u horas, y a veces pide una validación al comprador.</li>
+    <li>Si ahí figura <strong>rechazado</strong>, la persona tiene que intentar con otro medio de pago.</li>
+  </ol>
+</div>
+
+<!-- ==================== 11 ==================== -->
+<div class="sec">
+  <h2>11 · Usuarios y accesos</h2>
+
+  <p>En <strong>Usuarios</strong> aparece cada persona registrada, con su rol, cantidad de cursos y fecha de alta.</p>
+
+  <table>
+    <thead><tr><th>Rol</th><th>Qué puede hacer</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Cliente</strong></td><td>Comprar cursos, ver los suyos, marcar progreso.</td></tr>
+      <tr><td><strong>Admin</strong></td><td>Todo lo anterior más el panel completo.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Cómo se crea una cuenta</h3>
+  <ul>
+    <li><strong>Sola:</strong> la persona se registra en <code>/cursos/registro</code>, confirma el mail y ya puede comprar.</li>
+    <li><strong>Invitada:</strong> se envía una invitación desde el panel de Supabase (Authentication → Users → Invite). Le llega un mail con el diseño del sitio para crear su contraseña.</li>
+  </ul>
+
+  <h3>Acceso sin compra</h3>
+  <p>Para casos especiales (un canje, una alumna de una edición anterior, una beca) se puede crear la inscripción a mano desde la base de datos. Es una excepción, no el mecanismo normal: no hay botón en el panel para eso y conviene que lo haga quien mantiene el sistema.</p>
+
+  <div class="cuadro verde">
+    <p><strong>El rol admin se cambia solo desde la base de datos.</strong> No hay forma de ascenderse a uno mismo desde la web, y eso es a propósito.</p>
+  </div>
+</div>
+
+<!-- ==================== 12 ==================== -->
+<div class="sec">
+  <h2>12 · Reembolsos</h2>
+
+  <p>Los reembolsos se hacen <strong>desde Mercado Pago</strong>, no desde el panel: Mercado Pago → Actividad → el pago → Reembolsar.</p>
+
+  <ul>
+    <li>Se puede reembolsar dentro de los <strong>180 días</strong> desde el pago.</li>
+    <li>Mercado Pago necesita <strong>saldo disponible</strong> en la cuenta para devolver. Si la plata todavía está retenida, el reembolso no se completa.</li>
+    <li>En tarjeta de crédito, la devolución aparece en el resumen; en otros medios, vuelve a la cuenta del comprador.</li>
+    <li>El sistema marca la orden como <strong>reembolsada</strong> cuando Mercado Pago avisa.</li>
+  </ul>
+
+  <div class="cuadro">
+    <p><strong>Un reembolso no le quita el curso a la alumna.</strong> El acceso se conserva. Si además querés retirarle el acceso, eso es una decisión aparte y hay que hacerla a mano.</p>
+  </div>
+</div>
+
+<!-- ==================== 13 ==================== -->
+<div class="sec">
+  <h2>13 · Problemas frecuentes</h2>
+
+  <table>
+    <thead><tr><th>Síntoma</th><th>Causa habitual</th><th>Solución</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>El curso no aparece en el catálogo</td>
+        <td>Está en borrador</td>
+        <td>Tocá <strong>Publicar</strong> en la lista de cursos</td>
+      </tr>
+      <tr>
+        <td>La alumna compró y no ve el contenido</td>
+        <td>El pago no está acreditado</td>
+        <td>Revisá el estado en Compras y en Mercado Pago</td>
+      </tr>
+      <tr>
+        <td>«Ya tenés acceso a este curso» al comprar</td>
+        <td>Esa cuenta ya tiene la inscripción</td>
+        <td>Entrá a <strong>Mis cursos</strong>; no hace falta pagar de nuevo</td>
+      </tr>
+      <tr>
+        <td>No puedo borrar un curso</td>
+        <td>Tiene compras registradas</td>
+        <td><strong>Despublicar</strong> en lugar de eliminar</td>
+      </tr>
+      <tr>
+        <td>Un video no se reproduce</td>
+        <td>Está como privado en YouTube</td>
+        <td>Cambialo a <strong>no listado</strong></td>
+      </tr>
+      <tr>
+        <td>No puedo subir un archivo</td>
+        <td>Supera 50 MB o el formato no está permitido</td>
+        <td>Comprimilo o convertilo a PDF</td>
+      </tr>
+      <tr>
+        <td>La portada se ve recortada</td>
+        <td>La imagen no es 16:9</td>
+        <td>Subila en 1280 × 720</td>
+      </tr>
+      <tr>
+        <td>«Una de las partes es de prueba» al pagar</td>
+        <td>El sitio está usando credenciales de prueba de Mercado Pago</td>
+        <td>Problema técnico: hay que cargar las credenciales de producción</td>
+      </tr>
+      <tr>
+        <td>La compra se aprueba pero no da acceso</td>
+        <td>El aviso de Mercado Pago no pudo validarse</td>
+        <td>Problema técnico: revisar la firma del webhook</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="cuadro verde">
+    <p><strong>Antes de escribir a soporte</strong>, tené a mano: el email de la alumna, el nombre del curso y la fecha aproximada de la compra. Con eso se encuentra la orden en segundos.</p>
+  </div>
+</div>
+
+<!-- ==================== 14 ==================== -->
+<div class="sec">
+  <h2>14 · Buenas prácticas de contenido</h2>
+
+  <h3>Peso y formato</h3>
+  <ul>
+    <li>PDF en vez de Word: se abre en cualquier dispositivo sin romperse.</li>
+    <li>Imágenes de hasta 1600 px de ancho; más que eso no se nota y pesa el doble.</li>
+    <li>Un video por lección, no un video de dos horas.</li>
+    <li>Nombres de archivo claros antes de subirlos: el sistema los normaliza, pero el título que ve la alumna es el que escribís en el formulario.</li>
+  </ul>
+
+  <h3>Estructura</h3>
+  <ul>
+    <li>Módulos de 4 a 7 lecciones. Más que eso, conviene partir el módulo.</li>
+    <li>Títulos que digan qué se aprende: «Cómo leer los cambios del moco cervical» en lugar de «Clase 3».</li>
+    <li>Una introducción corta en cada módulo, aunque sea un párrafo.</li>
+    <li>El orden importa: la alumna avanza de arriba hacia abajo.</li>
+  </ul>
+
+  <h3>Antes de dar el curso por terminado</h3>
+  <ul>
+    <li>Recorré todo el curso en el celular, no solo en la computadora.</li>
+    <li>Probá abrir cada PDF: que no esté escaneado como imagen ilegible.</li>
+    <li>Mirá cada video hasta el final: que no esté bloqueado por derechos de autor.</li>
+    <li>Revisá que las tildes y los nombres propios estén bien.</li>
+  </ul>
+</div>
+
+<!-- ==================== 15 ==================== -->
+<div class="sec">
+  <h2>15 · Checklist antes de publicar</h2>
+
+  <table>
+    <thead><tr><th>✓</th><th>Punto</th></tr></thead>
+    <tbody>
+      <tr><td>☐</td><td>Título y descripción revisados, sin errores de tipeo</td></tr>
+      <tr><td>☐</td><td>Slug corto y claro</td></tr>
+      <tr><td>☐</td><td>Precio correcto, en pesos enteros</td></tr>
+      <tr><td>☐</td><td>Portada 16:9, horizontal y liviana</td></tr>
+      <tr><td>☐</td><td>Al menos un módulo con contenido real</td></tr>
+      <tr><td>☐</td><td>Todos los archivos abren bien</td></tr>
+      <tr><td>☐</td><td>Todos los videos están como <em>no listado</em> y se reproducen</td></tr>
+      <tr><td>☐</td><td>El curso se ve bien en el celular</td></tr>
+      <tr><td>☐</td><td>La ficha se ve bien en una ventana privada (sin sesión)</td></tr>
+      <tr><td>☐</td><td>Botón <strong>Publicar</strong> tocado</td></tr>
+      <tr><td>☐</td><td>El curso aparece en el catálogo público</td></tr>
+      <tr><td>☐</td><td>Hecha una compra de prueba (o revisado el flujo con Mercado Pago)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="cuadro">
+    <p><strong>La prueba que no se saltea:</strong> comprar el curso como una alumna. Es la única forma de confirmar que el cobro, el acceso y el aula funcionan de punta a punta. Si es tu propio curso, compralo con otra cuenta.</p>
+  </div>
+</div>
+
+<!-- ==================== 16 ==================== -->
+<div class="sec pb">
+  <h2>16 · Anexo técnico</h2>
+
+  <p>Esta sección es para quien mantiene la plataforma. No hace falta para el uso diario del panel.</p>
+
+  <h3>Infraestructura</h3>
+  <table>
+    <thead><tr><th>Pieza</th><th>Dónde vive</th></tr></thead>
+    <tbody>
+      <tr><td>Sitio (landing + cursos)</td><td>GitHub Pages, rama <code>main</code>, deploy automático con GitHub Actions</td></tr>
+      <tr><td>Base de datos, login y archivos</td><td>Supabase (proyecto <code>bvauhsmzzryqzglvdecq</code>)</td></tr>
+      <tr><td>Creación de la orden de pago</td><td>Edge Function <code>create-checkout</code></td></tr>
+      <tr><td>Confirmación del pago y acceso</td><td>Edge Function <code>mp-webhook</code></td></tr>
+      <tr><td>Cobros</td><td>Mercado Pago, Checkout Pro con API Orders</td></tr>
+      <tr><td>Mails de cuenta</td><td>Supabase Auth + SMTP propio (Resend)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Reglas de diseño que no se deben romper</h3>
+  <ul>
+    <li>El acceso se otorga <strong>solo</strong> desde el webhook, después de verificar firma, monto y estado real del pago.</li>
+    <li>El precio se lee <strong>siempre</strong> de la base, nunca del navegador.</li>
+    <li>Las claves secretas viven <strong>solo</strong> en Supabase Secrets. Nunca en el repo, nunca en el front, nunca en un chat.</li>
+    <li>La clave pública de Supabase (anon) puede estar en el bundle: es pública por diseño.</li>
+  </ul>
+
+  <h3>URL del webhook</h3>
+  <pre><code>https://bvauhsmzzryqzglvdecq.supabase.co/functions/v1/mp-webhook</code></pre>
+
+  <h3>Secretos que usa el backend</h3>
+  <table>
+    <thead><tr><th>Nombre</th><th>Qué es</th></tr></thead>
+    <tbody>
+      <tr><td><code>MP_ACCESS_TOKEN</code></td><td>Token de producción de la aplicación de Mercado Pago</td></tr>
+      <tr><td><code>MP_WEBHOOK_SECRET</code></td><td>Firma secreta de la aplicación, para validar los avisos</td></tr>
+      <tr><td><code>SUPABASE_URL</code>, <code>SUPABASE_SERVICE_ROLE_KEY</code></td><td>Los provee Supabase automáticamente</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Comandos habituales</h3>
+  <pre><code># Cargar o rotar secretos (sin comillas en los valores)
+npx supabase secrets set --remote=bvauhsmzzryqzglvdecq ^
+  MP_ACCESS_TOKEN=APP_USR-... ^
+  MP_WEBHOOK_SECRET=...
+
+# Verificar que quedaron (muestra SHA-256, nunca el valor)
+npx supabase secrets list --remote=bvauhsmzzryqzglvdecq
+
+# Redesplegar las funciones
+npx supabase functions deploy create-checkout --use-api --remote=bvauhsmzzryqzglvdecq --yes
+npx supabase functions deploy mp-webhook --no-verify-jwt --use-api --remote=bvauhsmzzryqzglvdecq --yes</code></pre>
+
+  <h3>Cambiar de cuenta de Mercado Pago</h3>
+  <ol>
+    <li>En la cuenta nueva: crear aplicación, activar producción, configurar la URL del webhook con el evento <strong>Order</strong> y guardar.</li>
+    <li><strong>Después de guardar</strong>, copiar la firma secreta (puede cambiar al guardar la configuración).</li>
+    <li>Copiar el Access Token de producción.</li>
+    <li>Verificar el token contra la API: <code>GET https://api.mercadopago.com/users/me</code> debe devolver la cuenta correcta y <code>site_id: MLA</code>.</li>
+    <li>Cargar los dos secretos y hacer una compra mínima de prueba.</li>
+    <li>Confirmar en <code>payment_events</code> que el aviso entró con <code>firma_valida = true</code>.</li>
+  </ol>
+
+  <h3>Diagnóstico rápido</h3>
+  <pre><code>-- Últimos avisos recibidos de Mercado Pago
+select error, processed, received_at,
+       payload-&gt;&gt;'firma_valida' as firma_valida
+from public.payment_events
+order by received_at desc
+limit 10;
+
+-- Órdenes recientes
+select id, status, amount_cents, mp_order_id, paid_at
+from public.orders
+order by created_at desc
+limit 10;</code></pre>
+
+  <table>
+    <thead><tr><th>En <code>payment_events</code></th><th>Significa</th></tr></thead>
+    <tbody>
+      <tr><td><code>firma_invalida</code></td><td>La firma secreta cargada no coincide con la de la aplicación. Actualizarla.</td></tr>
+      <tr><td><code>sin_accion:processing</code></td><td>Aviso válido, pago todavía no acreditado. Esperar.</td></tr>
+      <tr><td><code>sin_accion:action_required</code></td><td>Pago rechazado pero la orden sigue abierta para reintentar.</td></tr>
+      <tr><td><code>monto_o_moneda_no_coinciden</code></td><td>El monto del pago no coincide con la orden local. La orden se marca rechazada.</td></tr>
+      <tr><td><code>processed = true</code></td><td>Aviso procesado: orden aprobada e inscripción creada.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="cuadro">
+    <p><strong>Lección aprendida:</strong> guardar la configuración de webhooks puede regenerar la firma secreta. Cada vez que se toca esa pantalla, hay que volver a cargar <code>MP_WEBHOOK_SECRET</code> y verificar con un pago real. Un <code>401</code> en el webhook no da acceso y Mercado Pago reintenta hasta 96 horas.</p>
+  </div>
+
+  <div class="pie">
+    Cuerpo Raíz · Abigail Vajda · Manual de administración v1.0 · Noviembre 2026
+  </div>
+</div>
+
+</body>
+</html>

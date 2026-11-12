@@ -20,7 +20,7 @@ export default function ComprasPage() {
     supabase
       .from('orders')
       .select(
-        'id, status, amount_cents, created_at, paid_at, mp_payment_id, profiles(email, display_name), courses(title)',
+        'id, status, amount_cents, created_at, paid_at, mp_order_id, profiles(email, display_name), courses(title)',
       )
       .order('created_at', { ascending: false })
       .limit(200)
@@ -54,7 +54,7 @@ export default function ComprasPage() {
                 <th>Curso</th>
                 <th>Monto</th>
                 <th>Estado</th>
-                <th>ID de pago (MP)</th>
+                <th>Orden de pago (MP)</th>
               </tr>
             </thead>
             <tbody>
@@ -68,7 +68,7 @@ export default function ComprasPage() {
                   <td>{c.courses?.title}</td>
                   <td>{formatARS(c.amount_cents)}</td>
                   <td>{ESTADOS[c.status] ?? c.status}</td>
-                  <td>{c.mp_payment_id ?? '—'}</td>
+                  <td>{c.mp_order_id ?? '—'}</td>
                 </tr>
               ))}
             </tbody>
