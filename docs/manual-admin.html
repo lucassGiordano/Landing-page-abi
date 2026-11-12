@@ -143,6 +143,30 @@
     border-radius: 2px;
     margin-right: 6px;
   }
+
+  .credito {
+    margin-top: 22mm;
+    padding-top: 8px;
+    border-top: 1px solid #ded5c2;
+    font-size: 8.6pt;
+    color: #4a5240;
+    line-height: 1.7;
+  }
+  .credito a { color: #4a5240; text-decoration: none; }
+  .credito .rol { color: #6c7a56; font-size: 7.6pt; letter-spacing: 0.14em; text-transform: uppercase; }
+
+  /* Al abrir el HTML en el navegador (sin imprimir) se lee como una hoja A4 */
+  @media screen {
+    body {
+      max-width: 210mm;
+      margin: 0 auto;
+      padding: 16mm;
+      background: #fff;
+      box-shadow: 0 0 0 1px #e5ddcc;
+    }
+    .cover { height: auto; min-height: 240mm; }
+    .sec.pb { margin-top: 12mm; padding-top: 6mm; border-top: 1px solid #e5ddcc; }
+  }
 </style>
 </head>
 <body>
@@ -157,6 +181,13 @@
     Versión 1.0 · Noviembre 2026<br>
     Sitio: abigailvajdacuerporaiz.com.ar<br>
     Documento interno
+  </div>
+
+  <div class="credito">
+    <span class="rol">Diseño y desarrollo</span><br>
+    <strong>Lucas Giordano</strong><br>
+    lucasgiordano6789@gmail.com<br>
+    linkedin.com/in/giordano-lucas-521934364
   </div>
 </div>
 
@@ -751,7 +782,8 @@ limit 10;</code></pre>
   </div>
 
   <div class="pie">
-    Cuerpo Raíz · Abigail Vajda · Manual de administración v1.0 · Noviembre 2026
+    Cuerpo Raíz · Abigail Vajda · Manual de administración v1.0 · Noviembre 2026<br>
+    Diseño y desarrollo: Lucas Giordano · lucasgiordano6789@gmail.com · linkedin.com/in/giordano-lucas-521934364
   </div>
 </div>
 
